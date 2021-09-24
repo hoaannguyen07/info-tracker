@@ -77,7 +77,3 @@ Rails.application.configure do
   
   
 end
-
-# google oauth
-ENV['GOOGLE_OAUTH_CLIENT_ID'] = '599026821535-motvpslijovit130h9g9el99ua7gpuf9.apps.googleusercontent.com'
-ENV['GOOGLE_OAUTH_CLIENT_SECRET'] = 'Di4wrVgDNFd2a9rcWxDd3mLW'
