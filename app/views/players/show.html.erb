@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @player.name %>
+</p>
+
+<p>
+  <strong>Played:</strong>
+  <%= @player.played %>
+</p>
+
+<p>
+  <strong>Wins:</strong>
+  <%= @player.wins %>
+</p>
+
+<p>
+  <strong>Strengths:</strong>
+  <%= @player.strengths %>
+</p>
+
+<p>
+  <strong>Weaknesses:</strong>
+  <%= @player.weaknesses %>
+</p>
+
+<p>
+  <strong>Additional info:</strong>
+  <%= @player.additional_info %>
+</p>
+
+<%= link_to 'Edit', edit_player_path(@player) %> |
+<%= link_to 'Back', players_path %>
