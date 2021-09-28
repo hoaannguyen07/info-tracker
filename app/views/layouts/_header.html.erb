@@ -1,0 +1,7 @@
+<div class="app-header">
+    <% if current_admin != nil %>
+      <%= link_to "Sign Out", destroy_admin_session_path %>
+    <% else %>
+      <%= link_to "Sign in with Google", admin_google_oauth2_omniauth_authorize_path %>
+    <% end %>
+</div>
