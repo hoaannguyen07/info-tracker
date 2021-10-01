@@ -1,4 +1,4 @@
-<div class="navbar">
+<nav class="navbar">
     <div class="navbar-right">
         <% if current_admin != nil%>
         <div class="dropdown">
@@ -9,8 +9,6 @@
                     <%= link_to "Sign Out", destroy_admin_session_path %>
                 </div> 
             </div>
-        <% else %>
-        <%= link_to "Sign in with Google", admin_google_oauth2_omniauth_authorize_path %>
         <% end %>
     </div>
-</div>
+</nav>

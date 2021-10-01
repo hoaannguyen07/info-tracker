@@ -1,20 +1,19 @@
-<div class="container">
+<div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
 
   <%# <%= link_to "Sign Out", destroy_admin_session_path %> 
 
-  <p> Hello, <%= current_admin.full_name %> </p>
-
   <p id="notice"><%= notice %></p>
 
-  <h2>Players</h2>
+  <h1>Players</h1>
 
-  <table class="player-table">
-    <thead>
+  <div>
+  <table class="table table-striped table-bordered table-responsive">
+    <thead class="thead-light">
       <tr>
-        <th>Name</th>
-        <th>Wins</th>
-        <th>Played</th>
-        <th>Actions</th>
+        <th scope="col">Name</th>
+        <th scope="col">Wins</th>
+        <th scope="col">Played</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
 
@@ -32,8 +31,11 @@
       <% end %>
     </tbody>
   </table>
+  </div>
 
   <br>
 
-  <%= link_to 'New Player', new_player_path %>
+  <button class="btn btn-secondary" onclick=<%= new_player_path%>>
+    <%= link_to "New Player", new_player_path%>
+  </button>
 </div>

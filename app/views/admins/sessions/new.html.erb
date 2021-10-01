@@ -1,2 +1,8 @@
-<h2>You're Logged out! Log in to the Admin Dashboard</h2>
-<%# <%= link_to "Sign in with Google", admin_google_oauth2_omniauth_authorize_path %>
+<div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
+    <h2>Welcome to the Table Tennis Opponent Tracker</h2>
+    <div> 
+        <button class="btn btn-secondary" onClick=<%= admin_google_oauth2_omniauth_authorize_path%>> 
+            <%= link_to "Get Started!", admin_google_oauth2_omniauth_authorize_path %>
+        </button>
+    <div>
+</div>
