@@ -1,14 +1,17 @@
-<nav class="navbar">
-    <div class="navbar-right">
-        <% if current_admin != nil%>
-        <div class="dropdown">
-                <button class="dropbtn">
-                    <%= image_tag current_admin.avatar_url, class: "avatar" %> 
-                </button>
-                <div class="dropdown-content">
-                    <%= link_to "Sign Out", destroy_admin_session_path %>
-                </div> 
-            </div>
-        <% end %>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
     </div>
+    <%# <div class="navbar-right"> %>
+        <%# <% if current_admin != nil%>
+        <%# <div class="dropdown"> %>
+                <%# <button class="dropbtn"> %>
+                    <%# <%= image_tag current_admin.avatar_url, class: "avatar" %> 
+                <%# </button> %>
+                <%# <div class="dropdown-content"> %>
+                    <%# <%= link_to "Sign Out", destroy_admin_session_path %> 
+                <%# </div>  %>
+            <%# </div> %>
+        <%# <% end %> 
+    <%# </div> %>
 </nav>

@@ -35,7 +35,6 @@
 
   <br>
 
-  <button class="btn btn-secondary" onclick=<%= new_player_path%>>
-    <%= link_to "New Player", new_player_path%>
-  </button>
+  <%= button_to "New Player", new_player_path, class: 'btn btn-secondary', :method => :get%>
+
 </div>
