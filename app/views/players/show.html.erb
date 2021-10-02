@@ -24,17 +24,17 @@
 
       <div class="form-group">
         <label for="strengthsInput" class="form-label">Strengths</label>
-        <input type="text-area" id="strengthsInput" class="form-control" placeholder=<%= @player.strengths%> disabled readonly>
+        <textarea type="text" id="strengthsInput" class="form-control" disabled readonly><%= @player.strengths%></textarea>
       </div>
 
       <div class="form-group">
         <label for="weaknessesInput" class="form-label">Weakensses</label>
-        <input type="text-area" id="weaknessesInput" class="form-control" placeholder=<%= @player.weaknesses %> disabled readonly>
+        <textarea id="weaknessesInput" class="form-control"  disabled readonly><%= @player.weaknesses %></textarea>
       </div>
 
       <div class="form-group">
         <label for="additionalInfoInput" class="form-label">Additional Info.</label>
-        <input type="text" id="additonalInfoInput" class="form-control" placeholder=<%= @player.additional_info %> disabled readonly>
+        <textarea id="additonalInfoInput" class="form-control"  disabled readonly><%= @player.additional_info %></textarea>
       </div>
       <%# </br>
       <%= link_to 'Edit', edit_player_path(@player), class: 'btn btn-secondary' %>
