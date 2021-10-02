@@ -142,7 +142,6 @@ RSpec.describe Player, type: :model do
       end
     end 
 
-
     # TESTING PLAYED FIELD
     context 'PLAYED' do
       it "is NOT valid without a 'played' input" do
