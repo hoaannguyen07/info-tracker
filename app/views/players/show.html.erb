@@ -1,38 +1,43 @@
 <div class="container">
-  <%= link_to 'Back', players_path, class: 'btn btn-secondary' %>
 
-  <form>
-    <div class="form-group">
-      <label for="nameInput" class="form-label">Name</label>
-      <input type="text" id="nameInput" class="form-control" placeholder=<%= @player.name %> disabled>
-    </div>
-
-    <div class="row">
-      <div class="form-group col-md-2">
-        <label for="playedInput" class="form-label">Played</label>
-        <input type="number-field" id="playedInput" class="form-control" placeholder=<%= @player.played %> disabled>
+  <div class='d-flex align-items-start'>
+    <a href=<%= players_path%>>
+      <%= bootstrap_icon  "arrow-left", width: 36, height: 36 %>
+    </a>
+  </div>
+  <br>
+  <div class="d-flex" style="justify-content: center">
+    <form>
+      <div class='align-self-center' style="text-align: center">
+        <h1><%= @player.name %></h1>
+        <div class="row" style="justify-content: center">
+          <div class="form-group col-md-2">
+            <label for="playedInput" class="form-label">Played</label>
+            <input type="number-field" id="playedInput" class="form-control" placeholder=<%= @player.played %> disabled>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="winsInput" class="form-label">Wins</label>
+            <input type="number-field" id="winsInput" class="form-control" placeholder=<%= @player.wins %> disabled>
+          </div>
+        </div>
       </div>
-      <div class="form-group col-md-2">
-        <label for="winsInput" class="form-label">Wins</label>
-        <input type="number-field" id="winsInput" class="form-control" placeholder=<%= @player.wins %> disabled>
+
+      <div class="form-group">
+        <label for="strengthsInput" class="form-label">Strengths</label>
+        <input type="text-area" id="strengthsInput" class="form-control" placeholder=<%= @player.strengths%> disabled readonly>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="strengthsInput" class="form-label">Name</label>
-      <input type="text-area" id="strengthsInput" class="form-control" placeholder=<%= @player.strengths %> disabled readonly>
-    </div>
+      <div class="form-group">
+        <label for="weaknessesInput" class="form-label">Weakensses</label>
+        <input type="text-area" id="weaknessesInput" class="form-control" placeholder=<%= @player.weaknesses %> disabled readonly>
+      </div>
 
-    <div class="form-group">
-      <label for="weaknessesInput" class="form-label">Name</label>
-      <input type="text-area" id="weaknessesInput" class="form-control" placeholder=<%= @player.weaknesses %> disabled readonly>
-    </div>
-
-    <div class="form-group">
-      <label for="additionalInfoInput" class="form-label">Additional Info.</label>
-      <input type="text" id="additonalInfoInput" class="form-control" placeholder=<%= @player.additional_info %> disabled readonly>
-    </div>
-    <%= link_to 'Edit', edit_player_path(@player), class: 'btn btn-secondary'%>
-  </form>
-  
+      <div class="form-group">
+        <label for="additionalInfoInput" class="form-label">Additional Info.</label>
+        <input type="text" id="additonalInfoInput" class="form-control" placeholder=<%= @player.additional_info %> disabled readonly>
+      </div>
+      <%# </br>
+      <%= link_to 'Edit', edit_player_path(@player), class: 'btn btn-secondary' %>
+    </form>
+  </div>
 <div>
