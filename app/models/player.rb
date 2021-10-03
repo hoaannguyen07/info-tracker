@@ -19,7 +19,7 @@ class Player < ApplicationRecord
     validate :played_at_least_equal_wins
     
     # admin_id is of bigint type and indices in the Admin table starts from 1 so admin_id needs to be a positive bigint
-    validates :admin_id, numericality: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 9223372036854775807}
+    # validates :admin_id, numericality: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 9223372036854775807}
 
     private
         def played_at_least_equal_wins

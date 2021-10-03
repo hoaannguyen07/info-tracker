@@ -12,4 +12,8 @@ class Admin < ApplicationRecord
     end
 
     has_many :players #, dependent: :destroy
+
+    validates :email, :full_name, presence: true
+
+    validates :email, uniqueness: {case_sensitive: false}
 end

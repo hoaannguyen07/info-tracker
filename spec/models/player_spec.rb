@@ -1,4 +1,11 @@
 # location: spec/models/player_spec.rb
+
+# if don't have /config/packs-test/ folder, then need to install it
+# Run the following commands:
+#   rails webpacker:install
+#   RAILS_ENV=test bundle exec rails webpacker:compile
+
+
 require 'rails_helper'
 
 RSpec.describe Player, type: :model do
@@ -307,9 +314,9 @@ RSpec.describe Player, type: :model do
       it "is valid with a positive integer in [0, 2,147,483,647]" do
         # make sure that play >= wins to make sure that doesn't play in roll in this test failing or succeeding
         # only test the functionality described
-        subject.played = 1000000 
+        subject.played = 2147483647 
 
-        subject.played = '+251234234' 
+        subject.wins = '+251234234' 
         expect(subject).to be_valid
       end
 
