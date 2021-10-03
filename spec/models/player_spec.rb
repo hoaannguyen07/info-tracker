@@ -239,8 +239,6 @@ RSpec.describe Player, type: :model do
       end
 
       it "is NOT valid with a non-numeric value" do
-        # make sure that play >= wins to make sure that doesn't play in roll in this test failing or succeeding
-        # only test the functionality described
         subject.played = 1000000 
 
         subject.wins = 'hello world'
@@ -266,8 +264,6 @@ RSpec.describe Player, type: :model do
       end
 
       it "is NOT valid with a float" do
-        # make sure that play >= wins to make sure that doesn't play in roll in this test failing or succeeding
-        # only test the functionality described
         subject.played = 1000000 
 
         subject.wins = '140.2304'
@@ -281,8 +277,6 @@ RSpec.describe Player, type: :model do
       end
 
       it "is NOT valid with a negative integer" do
-        # make sure that play >= wins to make sure that doesn't play in roll in this test failing or succeeding
-        # only test the functionality described
         subject.played = 1000000 
 
         subject.wins = '-12432'
@@ -293,8 +287,6 @@ RSpec.describe Player, type: :model do
       end
 
       it "is NOT valid with a positive, just out of bounds of an integer in [0, 2,147,483,647] from below" do
-        # make sure that play >= wins to make sure that doesn't play in roll in this test failing or succeeding
-        # only test the functionality described
         subject.played = 1000000 
 
         subject.wins = '-1' 
@@ -303,8 +295,6 @@ RSpec.describe Player, type: :model do
 
       # max in int SQL is 2147483647
       it "is NOT valid with a positive, just out of bounds of an integer in [0, 2,147,483,647] from above" do
-        # make sure that play >= wins to make sure that doesn't play in roll in this test failing or succeeding
-        # only test the functionality described
         subject.played = 1000000 
 
         subject.wins = '2147483648'
@@ -312,8 +302,6 @@ RSpec.describe Player, type: :model do
       end
       
       it "is valid with a positive integer in [0, 2,147,483,647]" do
-        # make sure that play >= wins to make sure that doesn't play in roll in this test failing or succeeding
-        # only test the functionality described
         subject.played = 2147483647 
 
         subject.wins = '+251234234' 
@@ -321,8 +309,6 @@ RSpec.describe Player, type: :model do
       end
 
       it "is valid with a positive integer in [0, 2,147,483,647] on the lower edge (0)" do
-        # make sure that play >= wins to make sure that doesn't play in roll in this test failing or succeeding
-        # only test the functionality described
         subject.played = 1000000 
 
         subject.wins = '0' 
@@ -331,8 +317,6 @@ RSpec.describe Player, type: :model do
 
       # max in int SQL is 2147483647
       it "is valid with a positive integer in [0, 2,147,483,647] on the upper edge (2147483647)" do
-        # make sure that play >= wins to make sure that doesn't play in roll in this test failing or succeeding
-        # only test the functionality described
         subject.played = 2147483647 
 
         subject.wins = '2147483647'
