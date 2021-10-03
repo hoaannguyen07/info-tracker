@@ -2,7 +2,7 @@
 
 ## Introduction ##
 
-Application Description
+We are creating a web application which is used to keep track of other table tennis players’ strengths and weaknesses. It will store personal wins and losses against each player. It will allow users to create opponent entries, edit player information, delete players, and read player data.
 
 ## Requirements ##
 
@@ -26,14 +26,16 @@ This code has been run and tested on:
 
 Download this code repository by using git:
 
- `git clone https://github.com/your_github_here.git`
-
-
+ git clone https://github.com/hoaannguyen07/info-tracker.git
+ 
 ## Tests ##
 
 An RSpec test suite is available and can be ran using:
+ 
 
-  `rspec spec/`
+
+  rspec spec/models/. --format documentation
+  rspec spec/routing/. --format documentation
 
 ## Execute Code ##
 
@@ -56,19 +58,22 @@ The application can be seen using a browser and navigating to http://localhost:3
 
 ## Environmental Variables/Files ##
 
-** Add instructions/description if your application requires it.
+please look at the /config/environments/development.rb file
 
 ## Deployment ##
 
-** Add instructions about how to deploy to Heroku
+Please go to this link and follow the directions:
+
+https://docs.google.com/document/d/1_aoIk1Mjbw8vhL84O23qKoUy2tRveq27AsUUaJmcKsA/edit?usp=sharing
 
 
 ## CI/CD ##
 
-TBD
+Please go to this link and follow the directions:
+
+https://docs.google.com/document/d/1_aoIk1Mjbw8vhL84O23qKoUy2tRveq27AsUUaJmcKsA/edit?usp=sharing
 
 ## Support ##
 
-Admins looking for support should first look at the application help page.
-Users looking for help seek out assistance from the customer.
+Please go to Piazza and raise your concern with the key phrase "info tracker" in your question and we will get back to you as soon as we can. 
 
