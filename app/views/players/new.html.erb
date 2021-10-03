@@ -1,5 +1,13 @@
-<h1>New Player</h1>
-
-<%= render 'form', player: @player %>
-
-<%= link_to 'Back', players_path %>
+<div class="container">
+    <div>
+        <a href=<%= players_path%>>
+            <%= bootstrap_icon  "arrow-left", width: 36, height: 36 %>
+        </a>
+    </div> 
+    <center>
+        <h1>New Player</h1>
+    </center>
+    <div class="d-flex" style="justify-content: center">
+        <%= render 'form', player: @player %>
+    </div>
+</div>

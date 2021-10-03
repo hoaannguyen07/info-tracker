@@ -1,41 +1,47 @@
-<%= link_to "Sign Out", destroy_admin_session_path %>
+<div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
+  <h1>Players</h1>
 
-<p> Hello, <%= current_admin.full_name %> </p>
-
-<p id="notice"><%= notice %></p>
-
-<h2>Players</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Played</th>
-      <th>Wins</th>
-      <th>Strengths</th>
-      <th>Weaknesses</th>
-      <th>Additional info</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @players.each do |player| %>
+  <div>
+  <table class="table table-striped table-bordered table-responsive">
+    <thead class="thead-light">
       <tr>
-        <td><%= player.name %></td>
-        <td><%= player.played %></td>
-        <td><%= player.wins %></td>
-        <td><%= player.strengths %></td>
-        <td><%= player.weaknesses %></td>
-        <td><%= player.additional_info %></td>
-        <td><%= link_to 'Show', player %></td>
-        <td><%= link_to 'Edit', edit_player_path(player) %></td>
-        <td><%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th scope="col">Name</th>
+        <th scope="col">Wins</th>
+        <th scope="col">Played</th>
+        <th scope="col">Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @players.each do |player| %>
+        <tr>
+          <td>
+            <a href="/players/<%= player.id%>"">
+              <%= bootstrap_icon  "search", width: 36, height: 36 %>
+            </a>
+            <%= link_to player.name, player %>
+          </td>
+          <td><%= player.wins %></td>
+          <td><%= player.played %></td>
+          <td>
+            <div class="d-flex">
+              <a href=<%= edit_player_path(player)%>>
+                <%= bootstrap_icon  "pen-fill", width: 36, height: 36 %>
+              </a>
+              <br><br>
+              <a data-method="delete" href="/players/<%= player.id%>" data-confirm="Are you sure?">
+                <%= bootstrap_icon  "trash-fill", width: 36, height: 36 %>
+              </a>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
 
-<%= link_to 'New Player', new_player_path %>
+  <br>
+
+  <%= button_to "Add a New Player", new_player_path, class: 'btn btn-secondary', :method => :get%>
+
+</div>
