@@ -1,5 +1,6 @@
 class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     def google_oauth2
+      auth
       admin = Admin.from_google(**from_google_params)
   
       if admin.present?
@@ -34,6 +35,6 @@ class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   
     def auth
-      @auth ||= request.env['omniauth.auth']
+      @auth ||= Rails.application.env_config["omniauth.auth"] || request.env["omniauth.auth"]
     end
   end

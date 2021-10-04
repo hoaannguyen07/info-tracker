@@ -13,16 +13,35 @@
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/players", type: :request do
-  
+  before do
+    Rails.application.env_config["devise.mapping"] = Devise.mappings[:admin] # If using Devise
+    Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google]
+
+    if (Admin.where(email: "johndoe@example.com").first.nil? == true)
+      Admin.create(email: "johndoe@example.com", full_name: "View Players Test", uid: "123abc456", avatar_url: "www.example.com")
+    end
+  end
   # Player. As you add validations to Player, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:valid_attributes) {{
+    "admin_id" => Admin.where(email: "johndoe@example.com").first.id,
+    "name" => "Name",
+    "played" => 5,
+    "wins" => 3,
+    "strengths" => "MyText",
+    "weaknesses" => "MyText",
+    "additional_info" => "MyText"
+  }}
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:invalid_attributes) {{
+    "admin_id" => Admin.where(email: "johndoe@example.com").first.id,
+    "name" => "Texas A&M",
+    "played" => 2,
+    "wins" => 10,
+    "strengths" => "",
+    "weaknesses" => "MyText",
+    "additional_info" => "MyText"
+  }}
 
   describe "GET /index" do
     it "renders a successful response" do

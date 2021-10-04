@@ -26,10 +26,10 @@ ActiveRecord::Schema.define(version: 2021_09_27_231131) do
   end
 
   create_table "players", force: :cascade do |t|
-    t.bigint "admin_id"
-    t.string "name"
-    t.integer "played"
-    t.integer "wins"
+    t.bigint "admin_id", null: false
+    t.string "name", null: false
+    t.integer "played", null: false
+    t.integer "wins", null: false
     t.text "strengths"
     t.text "weaknesses"
     t.text "additional_info"
