@@ -31,11 +31,8 @@ Download this code repository by using git:
 ## Tests ##
 
 An RSpec test suite is available and can be ran using:
- 
 
-
-  rspec spec/models/. --format documentation
-  rspec spec/routing/. --format documentation
+  `rspec spec/. --format documentation`
 
 ## Execute Code ##
 
