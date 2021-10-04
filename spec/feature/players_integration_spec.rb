@@ -135,6 +135,41 @@ RSpec.describe 'Players Features', type: :feature do
         expect(page).to_not have_content("Bossman")
     end
 
+    scenario 'Unable to create a new player with invalid attributes -> Non-numeric played' do
+        click_on 'New Player'
+        fill_in 'player[name]', with: "Bossman"
+        fill_in 'player[played]', with: "asdfasd"
+        fill_in 'player[wins]', with: "10"
+        fill_in 'player[strengths]', with: ""
+        fill_in 'player[weaknesses]', with: ""
+        fill_in 'player[additional_info]', with: ""
+        click_on 'Create Player'
+        
+        # verify expected error messages
+        expect(page).to have_content("Played values must be between 0 and 2,147,483,647")
+        expect(page).to have_content("Played cannot be less than wins")
+        
+        visit players_path
+        expect(page).to_not have_content("Bossman")
+    end
+
+    scenario 'Unable to create a new player with invalid attributes -> Non-numeric wins' do
+        click_on 'New Player'
+        fill_in 'player[name]', with: "Bossman"
+        fill_in 'player[played]', with: "25"
+        fill_in 'player[wins]', with: "asdfasd"
+        fill_in 'player[strengths]', with: ""
+        fill_in 'player[weaknesses]', with: ""
+        fill_in 'player[additional_info]', with: ""
+        click_on 'Create Player'
+        
+        # verify expected error messages
+        expect(page).to have_content("Wins values must be between 0 and 2,147,483,647")
+        
+        visit players_path
+        expect(page).to_not have_content("Bossman")
+    end
+
     scenario 'Unable to create a new player with invalid attributes -> Negative played' do
         click_on 'New Player'
         fill_in 'player[name]', with: "Bossman"
