@@ -2,7 +2,6 @@
 
 class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
-    auth
     admin = Admin.from_google(**from_google_params)
 
     if admin.present?
