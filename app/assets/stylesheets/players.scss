@@ -20,3 +20,30 @@
 // table, th, td {
 //     border: 1px solid black;
 // }
+
+.table-font {
+    font-size: large;
+}
+
+.search {
+    margin-right: 0.5rem;
+}
+
+.center-vert-hor {
+    vertical-align: middle;
+    align-items: center;
+    text-align: center;
+}
+
+.cell-pad {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.edit {
+    margin-right: 0.5rem;
+}
+
+.delete {
+    margin-left: 0.5rem;
+}
