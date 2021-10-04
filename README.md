@@ -58,7 +58,7 @@ The application can be seen using a browser and navigating to http://localhost:3
 
 ## Environmental Variables/Files ##
 
-please look at the /config/environments/development.rb file
+Environment variables `GOOGLE_OAUTH_CLIENT_ID` and `GOOGLE_OAUTH_CLIENT_SECRET` will be put at the bottom of the `/config/environments/development.rb` file
 
 ## Deployment ##
 
