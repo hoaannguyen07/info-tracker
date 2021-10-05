@@ -1,1 +1,1 @@
-release: bundle install & npm install & rails db:migrate
+release: npm install & bundle install & rails db:migrate
