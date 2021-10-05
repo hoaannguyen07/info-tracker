@@ -1,0 +1,47 @@
+<div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
+  <h1>Players</h1>
+
+  <div>
+  <table class="table table-striped table-bordered table-responsive table-font">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Wins</th>
+        <th scope="col">Played</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @players.each do |player| %>
+        <tr class="center-vert-hor cell-pad">
+          <td>
+            <a href="/players/<%= player.id%>"" class="search">
+              <%= bootstrap_icon  "search", width: 15, height: 25 %>
+            </a>
+            <%= link_to player.name, player %>
+          </td>
+          <td><%= player.wins %></td>
+          <td><%= player.played %></td>
+          <td>
+            <div class="d-flex center-vert-hor actions">
+              <a href=<%= edit_player_path(player)%> class="edit">
+                <%= bootstrap_icon  "pen-fill", width: 25, height: 25 %>
+              </a>
+              <br><br>
+              <a data-method="delete" href="/players/<%= player.id%>" data-confirm="Are you sure?" class="delete">
+                <%= bootstrap_icon  "trash-fill", width: 25, height: 25 %>
+              </a>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+
+  <br>
+
+  <%= button_to "Add a New Player", new_player_path, class: 'btn btn-secondary', :method => :get%>
+
+</div>
