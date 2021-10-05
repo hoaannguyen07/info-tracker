@@ -1,1 +1,1 @@
-release: rails db:migrate
+release: bundle install && rails webpacker:install && rails db:migrate && npm install
