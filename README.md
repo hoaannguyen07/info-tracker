@@ -31,8 +31,7 @@ Download this code repository by using git:
 ## Tests ##
 
 An RSpec test suite is available and can be ran using:
-
-  `rspec spec/. --format documentation`
+  `rspec spec/.` OR `rspec spec/. --format documentation`to get a more comprehensive look
 
 ## Execute Code ##
 
@@ -46,10 +45,10 @@ Run the following code in Powershell if using windows or the terminal using Linu
 
 Install the app
 
-  `bundle install && rails webpacker:install && rails db:create && db:migrate && npm install`
+  `bundle install && npm install && rails db:create && db:migrate && bundle exec rake assets:precompile`
 
 Run the app
-  `rails server --binding:0.0.0.0`
+  `rails server --binding=0.0.0.0`
 
 The application can be seen using a browser and navigating to http://localhost:3000/
 
