@@ -31,11 +31,7 @@ Download this code repository by using git:
 ## Tests ##
 
 An RSpec test suite is available and can be ran using:
- 
-
-
-  rspec spec/models/. --format documentation
-  rspec spec/routing/. --format documentation
+  `rspec spec/.` OR `rspec spec/. --format documentation`to get a more comprehensive look
 
 ## Execute Code ##
 
@@ -49,16 +45,16 @@ Run the following code in Powershell if using windows or the terminal using Linu
 
 Install the app
 
-  `bundle install && rails webpacker:install && rails db:create && db:migrate`
+  `bundle install && npm install && rails db:create && db:migrate && bundle exec rake assets:precompile`
 
 Run the app
-  `rails server --binding:0.0.0.0`
+  `rails server --binding=0.0.0.0`
 
 The application can be seen using a browser and navigating to http://localhost:3000/
 
 ## Environmental Variables/Files ##
 
-Environment variables `GOOGLE_OAUTH_CLIENT_ID` and `GOOGLE_OAUTH_CLIENT_SECRET` will be put at the bottom of the `/config/environments/development.rb` file
+please look at the /config/environments/development.rb file
 
 ## Deployment ##
 
@@ -76,4 +72,3 @@ https://docs.google.com/document/d/1_aoIk1Mjbw8vhL84O23qKoUy2tRveq27AsUUaJmcKsA/
 ## Support ##
 
 Please go to Piazza and raise your concern with the key phrase "info tracker" in your question and we will get back to you as soon as we can. 
-
