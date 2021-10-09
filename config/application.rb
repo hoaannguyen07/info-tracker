@@ -8,6 +8,9 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# laod .env to get environment variables
+Dotenv::Railtie.load
+
 module InfoTracker
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.

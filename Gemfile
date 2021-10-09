@@ -51,6 +51,9 @@ group :development, :test do
   gem 'rubocop-performance'
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
+
+  # manage environment variables
+  gem 'dotenv-rails'
 end
 
 group :development do
