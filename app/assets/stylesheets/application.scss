@@ -1,5 +1,5 @@
-@import "bootstrap";
-@import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
+// @import "bootstrap";
+// @import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
 
 .navbar {
     margin-bottom: 20;
@@ -17,6 +17,10 @@ body {
     font-family: 'Merriweather', sans-serif;
 }
 
+.page-top-margin {
+    margin-top: 10px;
+}
+
 h1,
 h2 {
     font-weight: bold;
@@ -26,27 +30,27 @@ p {
     color: black;
 }
 a:visited {
-    color: $black;
+    color: black;
 }
 .jumbotron {
     background: #0048CD;
-    color: $white;
+    color: white;
     text-align: center;
     p {
-            color: $white;
+            color: white;
             font-size: 26px;
     }
 }
 .link {
-    color: $white;
+    color: white;
 }
 .btn-primary {
-    color: $white;
-    border-color: $white;
+    color: white;
+    border-color: white;
     margin-bottom: 5px;
 }
 .btn-sm {
-    background-color: $white;
+    background-color: white;
     display: inline-block;
 }
 img,
@@ -60,4 +64,45 @@ caption {
     float: left;
     clear: both;
 
+}
+
+.flex-header {
+    display: flex;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.back-button {
+    text-decoration: none;
+}
+
+.table-font {
+    font-size: large;
+}
+
+.search {
+    margin-right: 0.5rem;
+}
+
+.center-vert-hor {
+    vertical-align: middle;
+    align-items: center;
+    text-align: center;
+}
+
+.cell-pad {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.edit {
+    margin-right: 0.2rem;
+    margin-left: 0.05rem;
+}
+
+.delete {
+    margin-left: 0.2rem;
+    margin-right: 0.05rem;
 }

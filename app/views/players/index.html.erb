@@ -2,42 +2,48 @@
   <h1>Players</h1>
 
   <div>
-  <table class="table table-striped table-bordered table-responsive table-font">
-    <thead class="thead-light">
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Wins</th>
-        <th scope="col">Played</th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @players.each do |player| %>
-        <tr class="center-vert-hor cell-pad">
-          <td>
-            <a href="/players/<%= player.id%>"" class="search">
-              <%= bootstrap_icon  "search", width: 15, height: 25 %>
-            </a>
-            <%= link_to player.name, player %>
-          </td>
-          <td><%= player.wins %></td>
-          <td><%= player.played %></td>
-          <td>
-            <div class="d-flex center-vert-hor actions">
-              <a href=<%= edit_player_path(player)%> class="edit">
-                <%= bootstrap_icon  "pen-fill", width: 25, height: 25 %>
-              </a>
-              <br><br>
-              <a data-method="delete" href="/players/<%= player.id%>" data-confirm="Are you sure?" class="delete">
-                <%= bootstrap_icon  "trash-fill", width: 25, height: 25 %>
-              </a>
-            </div>
-          </td>
+    <table class="table table-striped table-bordered table-responsive table-font">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Wins</th>
+          <th scope="col">Played</th>
+          <th scope="col">Actions</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        <% @players.each do |player| %>
+          <tr class="center-vert-hor cell-pad">
+            <td>
+              <a href="/players/<%= player.id%>">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search search" viewbox="0 0 16 16">
+                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+                <%= player.name %>
+              </a>
+            </td>
+            <td><%= player.wins %></td>
+            <td><%= player.played %></td>
+            <td>
+              <div class="d-flex center-vert-hor actions">
+                <a href=<%= edit_player_path(player)%> class="edit">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-pen-fill edit" viewbox="0 0 16 16">
+                    <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+                  </svg>
+                </a>
+                <br><br>
+                <a data-method="delete" href="/players/<%= player.id%>" data-confirm="Are you sure?" class="delete">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash-fill delete" viewbox="0 0 16 16">
+                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                  </svg>
+                </a>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 
   <br>

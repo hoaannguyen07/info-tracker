@@ -1,9 +1,7 @@
 <div class="container">
 
-  <div class='d-flex align-items-start'>
-    <a href=<%= players_path%>>
-      <%= bootstrap_icon  "arrow-left", width: 36, height: 36 %>
-    </a>
+  <div class="container page-top-margin">
+    <%= render 'back'%>
   </div>
   <br>
   <div class="d-flex" style="justify-content: center">
@@ -13,31 +11,31 @@
         <div class="row" style="justify-content: center">
           <div class="form-group col-md-2">
             <label for="playedInput" class="form-label">Played</label>
-            <input type="number-field" id="playedInput" class="form-control" placeholder=<%= @player.played %> disabled>
+            <input type="number-field" id="playedInput" class="form-control" placeholder=<%= @player.played %> disabled="disabled">
           </div>
           <div class="form-group col-md-2">
             <label for="winsInput" class="form-label">Wins</label>
-            <input type="number-field" id="winsInput" class="form-control" placeholder=<%= @player.wins %> disabled>
+            <input type="number-field" id="winsInput" class="form-control" placeholder=<%= @player.wins %> disabled="disabled">
           </div>
         </div>
       </div>
 
       <div class="form-group">
         <label for="strengthsInput" class="form-label">Strengths</label>
-        <textarea type="text" id="strengthsInput" class="form-control" disabled readonly><%= @player.strengths%></textarea>
+        <textarea type="text" id="strengthsInput" class="form-control" disabled="disabled" readonly="readonly"><%= @player.strengths%></textarea>
       </div>
 
       <div class="form-group">
         <label for="weaknessesInput" class="form-label">Weakensses</label>
-        <textarea id="weaknessesInput" class="form-control"  disabled readonly><%= @player.weaknesses %></textarea>
+        <textarea id="weaknessesInput" class="form-control" disabled="disabled" readonly="readonly"><%= @player.weaknesses %></textarea>
       </div>
 
       <div class="form-group">
         <label for="additionalInfoInput" class="form-label">Additional Info.</label>
-        <textarea id="additonalInfoInput" class="form-control"  disabled readonly><%= @player.additional_info %></textarea>
+        <textarea id="additonalInfoInput" class="form-control" disabled="disabled" readonly="readonly"><%= @player.additional_info %></textarea>
       </div>
       <%# </br>
       <%= link_to 'Edit', edit_player_path(@player), class: 'btn btn-secondary' %>
-    </form>
-  </div>
-<div>
+      </form>
+    </div>
+    <div>
