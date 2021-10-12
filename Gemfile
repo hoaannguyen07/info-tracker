@@ -33,7 +33,6 @@ gem 'bootstrap', '~> 5.1.0'
 gem 'jquery-rails'
 gem 'sassc-rails', '>= 2.1.0'
 
-# gem 'bootstrap-icons-helper'
 gem 'rexml'
 
 # google oauth gems

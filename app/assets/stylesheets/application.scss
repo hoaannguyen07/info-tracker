@@ -17,6 +17,10 @@ body {
     font-family: 'Merriweather', sans-serif;
 }
 
+bg-maroon {
+    background-color: maroon;
+}
+
 .page-top-margin {
     margin-top: 10px;
 }
@@ -53,12 +57,7 @@ a:visited {
     background-color: white;
     display: inline-block;
 }
-img,
-video,
-audio {
-    margin-top: 20px;
-    max-width: 80%;
-}
+
 caption {
 
     float: left;
