@@ -1,49 +1,50 @@
 <%= form_with(model: player, class: "") do |form| %>
-  <% if player.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(player.errors.count, "error") %> prohibited this player from being saved:</h2>
+<% if player.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(player.errors.count, "error") %>
+      prohibited this player from being saved:</h2>
 
-      <ul>
-        <% player.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <ul>
+      <% player.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
-    <div class="form-group">
-      <%= form.label :name, class: 'form-label' %>
-      <%= form.text_field :name, class: 'form-control', rows: '3', placeholder: 'Enter Player Name'%>
-    </div>
+<div class="form-group">
+  <%= form.label :name, class: 'form-label' %>
+  <%= form.text_field :name, class: 'form-control', rows: '3', placeholder: 'Enter Player Name'%>
+</div>
 
-    <div class="row">
-      <div class="form-group col-md-2">
-        <%= form.label :played, class: 'form-label' %>
-        <%= form.number_field :played, class: 'form-control', placeholder: 'Enter Player Name'%>
-      </div>
-      <div class="form-group col-md-2">
-        <%= form.label :wins, class: 'form-label'%>
-        <%= form.number_field :wins, class: 'form-control' %>
-      </div>
-    </div>
+<div class="row">
+  <div class="form-group col-md-2">
+    <%= form.label :wins, class: 'form-label'%>
+    <%= form.number_field :wins, class: 'form-control' %>
+  </div>
+  <div class="form-group col-md-2">
+    <%= form.label :losses, class: 'form-label' %>
+    <%= form.number_field :losses, class: 'form-control'%>
+  </div>
+</div>
 
-    <div class="form-group">
-      <%= form.label :strengths, class: 'form-label' %>
-      <%= form.text_area :strengths, class: 'form-control', placeholder: 'What are some strengths?'%>
-    </div>
+<div class="form-group">
+  <%= form.label :strengths, class: 'form-label' %>
+  <%= form.text_area :strengths, class: 'form-control', placeholder: 'What are some strengths?'%>
+</div>
 
-    <div class="form-group">
-      <%= form.label :weaknesses, class: 'form-label'%>
-      <%= form.text_area :weaknesses, class: 'form-control', placeholder: 'What are some weaknesses?'%>
-    </div>
+<div class="form-group">
+  <%= form.label :weaknesses, class: 'form-label'%>
+  <%= form.text_area :weaknesses, class: 'form-control', placeholder: 'What are some weaknesses?'%>
+</div>
 
-    <div class="form-group">
-      <%= form.label :additional_info, class: 'form-label'%>
-      <%= form.text_area :additional_info, class: 'form-control', placeholder: 'Any additional information?'%>
-    </div>
+<div class="form-group">
+  <%= form.label :additional_info, class: 'form-label'%>
+  <%= form.text_area :additional_info, class: 'form-control', placeholder: 'Any additional information?'%>
+</div>
 
-    <br>
-    
-    <button type='submit' class='btn btn-secondary'>Submit</button>
-    
+<br>
+
+<button type='submit' class='btn btn-secondary'>Submit</button>
+
 <% end %>

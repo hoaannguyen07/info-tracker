@@ -14,7 +14,7 @@ class PlayersController < ApplicationController
 
   # GET /players/new
   def new
-    @player = Player.new(played: 0, wins: 0)
+    @player = Player.new(losses: 0, wins: 0)
   end
 
   # GET /players/1/edit
@@ -71,6 +71,6 @@ class PlayersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def player_params
-    params.require(:player).permit(:name, :played, :wins, :strengths, :weaknesses, :additional_info)
+    params.require(:player).permit(:name, :losses, :wins, :strengths, :weaknesses, :additional_info)
   end
 end
