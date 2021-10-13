@@ -76,6 +76,9 @@ Layout/ClassStructure:
         - private_delegate
         - private_methods
 
+Layout/IndentationWidth:
+  Width: 4
+
 Layout/EmptyLineAfterMultilineCondition:
     Enabled: true
 
