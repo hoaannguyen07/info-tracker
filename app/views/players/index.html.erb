@@ -7,7 +7,7 @@
         <tr>
           <th scope="col">Name</th>
           <th scope="col">Wins</th>
-          <th scope="col">Played</th>
+          <th scope="col">Losses</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
@@ -24,7 +24,7 @@
               </a>
             </td>
             <td><%= player.wins %></td>
-            <td><%= player.played %></td>
+            <td><%= player.losses %></td>
             <td>
               <div class="d-flex center-vert-hor actions">
                 <a href=<%= edit_player_path(player)%> class="edit">
