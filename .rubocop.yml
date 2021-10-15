@@ -1,5 +1,5 @@
 inherit_from:
-    # - .rubocop_todo.yml
+    - .rubocop_todo.yml
     - .rubocop-performance.yml
     - .rubocop-rails.yml
     - .rubocop-performance.yml
@@ -77,13 +77,16 @@ Layout/ClassStructure:
         - private_methods
 
 Layout/IndentationWidth:
-  Width: 4
+    Width: 4
 
 Layout/EmptyLineAfterMultilineCondition:
     Enabled: true
 
 Layout/EmptyLinesAroundAttributeAccessor:
     Enabled: true
+
+Layout/EndOfLine:
+    Enabled: false
 
 Layout/FirstArrayElementIndentation:
     EnforcedStyle: consistent
@@ -101,7 +104,7 @@ Layout/LineEndStringConcatenationIndentation: # (new in 1.18)
     Enabled: true
 
 Layout/LineLength:
-    Max: 154
+    Max: 150
     Exclude:
         - "**/spec/**/*"
 
@@ -278,6 +281,10 @@ Metrics/ModuleLength:
     Exclude:
         - "**/spec/**/*"
 
+Metrics/ParameterLists:
+    Exclude:
+        - "**/spec/feature/*"
+
 Metrics/PerceivedComplexity:
     Max: 10
 
@@ -383,7 +390,7 @@ Style/MethodCallWithArgsParentheses:
     Enabled: true
 
 Style/MissingElse:
-    Enabled: true
+    Enabled: false
 
 Style/MultilineInPatternThen: # (new in 1.16)
     Enabled: true
@@ -437,7 +444,17 @@ Style/SwapValues: # (new in 1.1)
 ######################## RSpec ############################
 ###########################################################
 
-RSpec/IdenticalEqualityAssertion: # (new in 2.4)
-    Enabled: true
 RSpec/Rails/AvoidSetupHook: # (new in 2.4)
     Enabled: true
+
+RSpec/ContextWording:
+    Enabled: false
+
+RSpec/ExampleLength:
+    Max: 15
+
+RSpec/IdenticalEqualityAssertion: # (new in 2.4)
+    Enabled: true
+
+RSpec/MultipleExpectations:
+    Enabled: false
