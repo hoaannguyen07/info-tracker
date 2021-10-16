@@ -12,7 +12,7 @@ RSpec.describe('Authentication', type: :feature) do
   it 'root page redirects to Sign in Page if not signed in' do
     visit root_path
     # verify redirection & the page content to be the sign in page
-    expect(page).to(have_current_path('/admins/sign_in'))
+    expect(page).to(have_current_path(new_admin_session_path))
     expect(page).to(have_content('Welcome to the Table Tennis Opponent Tracker'))
     expect(page).to(have_selector(:link_or_button, 'Get Started!'))
   end
@@ -20,7 +20,7 @@ RSpec.describe('Authentication', type: :feature) do
   it 'players#index redirects to Sign in Page if not signed in' do
     visit players_path
     # verify redirection & the page content to be the sign in page
-    expect(page).to(have_current_path('/admins/sign_in'))
+    expect(page).to(have_current_path(new_admin_session_path))
     expect(page).to(have_content('Welcome to the Table Tennis Opponent Tracker'))
     expect(page).to(have_selector(:link_or_button, 'Get Started!'))
   end
@@ -28,7 +28,7 @@ RSpec.describe('Authentication', type: :feature) do
   it 'players#new redirects to Sign in Page if not signed in' do
     visit new_player_path
     # verify redirection & the page content to be the sign in page
-    expect(page).to(have_current_path('/admins/sign_in'))
+    expect(page).to(have_current_path(new_admin_session_path))
     expect(page).to(have_content('Welcome to the Table Tennis Opponent Tracker'))
     expect(page).to(have_selector(:link_or_button, 'Get Started!'))
   end
