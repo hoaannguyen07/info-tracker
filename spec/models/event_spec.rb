@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe Event, type: :model do
+RSpec.describe(Event, type: :model) do
   # pending "add some examples to (or delete) #{__FILE__}"
 
   subject(:test_event) do
@@ -58,5 +60,4 @@ RSpec.describe Event, type: :model do
       expect(test_event).not_to(be_valid)
     end
   end
-
 end

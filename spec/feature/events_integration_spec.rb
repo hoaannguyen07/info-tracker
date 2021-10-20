@@ -16,5 +16,4 @@ RSpec.describe('Players Features', type: :feature) do
     Player.delete_all
     visit events_path
   end
-
 end
