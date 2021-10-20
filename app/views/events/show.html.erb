@@ -1,24 +1,29 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
+  <div class="container page-top-margin">
+    <%= render 'back'%>
+  </div>
+  <br>
+  <div class="d-flex" style="justify-content: center">
+    <form>
+      <div class='align-self-center' style="text-align: center">
+        <h1><%= @event.name %></h1>
+      </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
+      <div class="form-group">
+        <label for="descriptionsInput" class="form-label">Description</label>
+        <textarea type="text" id="descriptionsInput" class="form-control" disabled="disabled" readonly="readonly"><%= @event.description%></textarea>
+      </div>
 
-<p>
-  <strong>Location:</strong>
-  <%= @event.location %>
-</p>
+      <div class="form-group">
+        <label for="locationsInput" class="form-label">Location</label>
+        <textarea id="locationsInput" class="form-control" disabled="disabled" readonly="readonly"><%= @event.location %></textarea>
+      </div>
 
-<p>
-  <strong>Time:</strong>
-  <%= @event.time %>
-</p>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+      <div class="form-group">
+        <label for="timeInput" class="form-label">Time</label>
+        <textarea id="timeInput" class="form-control" disabled="disabled" readonly="readonly"><%= @event.time.strftime("%m/%d/%Y, %I:%M %p %Z") %></textarea>
+      </div>
+    </form>
+  </div>
+<div>

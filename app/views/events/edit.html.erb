@@ -1,6 +1,17 @@
-<h1>Editing Event</h1>
+<div class="container">
+  <div class="container page-top-margin">
+    <%= render 'back'%>
+  </div>
+  <div class="container center-text">
+    <h1>
+      Editing
+      <%= @event.name %>
+    </h1>
+  </div>
 
-<%= render 'form', event: @event %>
+  <div class="d-flex" style="justify-content: center">
+    <%= render 'form', event: @event %>
+  </div>
 
-<%= link_to 'Show', @event %> |
-<%= link_to 'Back', events_path %>
+  <%# <%= link_to 'Show', @event %>
+  </div>
