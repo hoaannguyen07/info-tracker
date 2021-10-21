@@ -105,3 +105,20 @@ caption {
     margin-left: 0.2rem;
     margin-right: 0.05rem;
 }
+
+.container {
+    height: 75vh;
+    margin: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+.cell {
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+    padding: 4rem;
+}
