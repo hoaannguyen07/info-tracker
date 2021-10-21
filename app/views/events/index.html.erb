@@ -1,40 +1,41 @@
-<div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
-  <h1>Players</h1>
-  <%= button_to "New Player", new_player_path, class: 'btn btn-secondary', :method => :get%>
+<div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%"> 
+  <h1>Events</h1> 
+  <%= button_to "New Event", new_event_path, class: 'btn btn-secondary', :method => :get%>
   <br/>
+
   <div>
     <table class="table table-striped table-bordered table-responsive table-font">
       <thead class="thead-light">
         <tr>
           <th scope="col" class="text-center">Name</th>
-          <th scope="col" class="text-center">Wins</th>
-          <th scope="col" class="text-center">Losses</th>
+          <th scope="col" class="text-center">Location</th>
+          <th scope="col" class="text-center">Time</th>
           <th scope="col" class="text-center">Actions</th>
         </tr>
       </thead>
 
       <tbody>
-        <% @players.each do |player| %>
+        <% @events.each do |event| %>
           <tr class="center-vert-hor cell-pad">
             <td>
-              <a href="/players/<%= player.id%>">
+              <a href="/events/<%= event.id%>">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search search" viewbox="0 0 16 16">
                   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                 </svg>
-                <%= player.name %>
+                <%= event.name %>
               </a>
             </td>
-            <td><%= player.wins %></td>
-            <td><%= player.losses %></td>
+            <td><%= event.location %></td>
+            <td><%= event.time.strftime("%m/%d/%Y, %I:%M %p %Z") %></td>
             <td>
               <div class="d-flex center-vert-hor actions">
-                <a href=<%= edit_player_path(player)%> class="edit">
+                <a href=<%= edit_event_path(event)%> class="edit">
                   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-pen-fill edit" viewbox="0 0 16 16">
                     <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
                   </svg>
                 </a>
                 <br><br>
-                <a data-method="delete" href="/players/<%= player.id%>" data-confirm="Are you sure?" class="delete">
+                <a data-method="delete" href="/events/<%= event.id%>" data-confirm="Are you sure?" class="delete">
                   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash-fill delete" viewbox="0 0 16 16">
                     <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                   </svg>
@@ -45,9 +46,9 @@
         <% end %>
       </tbody>
     </table>
+
   </div>
 
   <br>
-
 
 </div>

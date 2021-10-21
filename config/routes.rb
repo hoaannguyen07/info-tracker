@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
   #   root 'login#index'
   resources :players
+  resources :events
 
   get 'login/index'
   get 'users/main'
