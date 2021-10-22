@@ -106,17 +106,13 @@ caption {
     margin-right: 0.05rem;
 }
 
-.container {
-    height: 75vh;
-    margin: 2rem;
+.grid-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto;
-    column-gap: 10px;
-    row-gap: 10px;
+    grid-template-areas: "a a";
+    grid-auto-rows: 25px;
 }
 
-.cell {
+.grid-cell {
     color: white;
     font-size: 3rem;
     text-align: center;

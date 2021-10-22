@@ -2,8 +2,8 @@
 
 <h1>Image Gallery</h1>
 
-<div class="container">
-  <div class="cell">
+<div class="grid-container">
+  <div class="grid-cell">
     <% @images.each do |image| %>
       <%= link_to image_tag(image.img.variant(resize_to_limit: [400, 300])), edit_image_path(image) %>
     <% end %>
