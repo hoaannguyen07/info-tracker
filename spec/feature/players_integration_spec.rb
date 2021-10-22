@@ -18,7 +18,7 @@ RSpec.describe('Players Features', type: :feature) do
   end
 
   def create_valid_player
-    click_on('Add a New Player')
+    click_on('New Player')
     fill_in('player[name]', with: 'Jane Doe')
     fill_in('player[losses]', with: '25')
     fill_in('player[wins]', with: '10')
@@ -58,26 +58,26 @@ RSpec.describe('Players Features', type: :feature) do
   it 'is at root page after login' do
     expect(page).to(have_current_path(root_path))
     expect(page).to(have_content('Players'))
-    expect(page).to(have_selector(:link_or_button, 'Add a New Player'))
+    expect(page).to(have_selector(:link_or_button, 'New Player'))
   end
 
   it 'is able to go to players#index page and have contents be the same as root page' do
     visit players_path
     expect(page).to(have_current_path(players_path))
     expect(page).to(have_content('Players'))
-    expect(page).to(have_selector(:link_or_button, 'Add a New Player'))
+    expect(page).to(have_selector(:link_or_button, 'New Player'))
   end
 
   describe('#new feature') do
     it 'is able to go to #new' do
-      expect(page).to(have_selector(:link_or_button, 'Add a New Player'))
-      click_on 'Add a New Player'
+      expect(page).to(have_selector(:link_or_button, 'New Player'))
+      click_on 'New Player'
       expect(page).to(have_current_path(new_player_path))
     end
 
     context('when creating a player is successful') do
       it 'new player has valid attributes' do
-        click_on 'Add a New Player'
+        click_on 'New Player'
         fill_in_form('Jane Doe', '25', '10',
                      "She has an amazing backhand that I can't beat",
                      'She cannot spin spin the ball very well',
@@ -90,7 +90,7 @@ RSpec.describe('Players Features', type: :feature) do
       end
 
       it 'new player allows strengths, weaknesses, and additional info to have special characters' do
-        click_on 'Add a New Player'
+        click_on 'New Player'
         str = "`~1!2@3#4$5%6^7&8*9(0)-_=+qQwWeErRtTyYuUiIoOpP[{]}\|aAsSdDfFgGhHjJkKlL;:'\"zZxXcCvVbBnNmM,<.>/? \n\t "
         fill_in_form('Bossman', '15', '10', str, str, str)
         click_on 'Submit'
@@ -102,7 +102,7 @@ RSpec.describe('Players Features', type: :feature) do
 
     context('when creating a player is unsuccessful') do
       it 'new player has invalid attributes' do
-        click_on 'Add a New Player'
+        click_on 'New Player'
         fill_in_form('Bossman', '-5', '-1', '', '', '')
         click_on 'Submit'
 
@@ -111,7 +111,7 @@ RSpec.describe('Players Features', type: :feature) do
       end
 
       it 'new player has blank name' do
-        click_on 'Add a New Player'
+        click_on 'New Player'
         fill_in_form('', '5', '10', '', '', '')
         click_on 'Submit'
 
@@ -124,7 +124,7 @@ RSpec.describe('Players Features', type: :feature) do
       end
 
       it 'new player has special character(s) in name' do
-        click_on 'Add a New Player'
+        click_on 'New Player'
         fill_in_form('Texas A&M', '10', '10', '', '', '')
         click_on 'Submit'
 
@@ -137,7 +137,7 @@ RSpec.describe('Players Features', type: :feature) do
       end
 
       it 'new player has blank losses' do
-        click_on 'Add a New Player'
+        click_on 'New Player'
         fill_in_form('Bossman', '', '10', '', '', '')
         click_on 'Submit'
 
@@ -150,7 +150,7 @@ RSpec.describe('Players Features', type: :feature) do
       end
 
       it 'new player has blank wins' do
-        click_on 'Add a New Player'
+        click_on 'New Player'
         fill_in_form('Bossman', '25', '', '', '', '')
         click_on 'Submit'
 
@@ -163,7 +163,7 @@ RSpec.describe('Players Features', type: :feature) do
       end
 
       it 'new player has non-numeric losses' do
-        click_on 'Add a New Player'
+        click_on 'New Player'
         fill_in_form('Bossman', 'asdfasd', '10', '', '', '')
         click_on 'Submit'
 
@@ -175,7 +175,7 @@ RSpec.describe('Players Features', type: :feature) do
       end
 
       it 'new player has non-numeric wins' do
-        click_on 'Add a New Player'
+        click_on 'New Player'
         fill_in_form('Bossman', '25', 'asdfasd', '', '', '')
         click_on 'Submit'
 
@@ -187,7 +187,7 @@ RSpec.describe('Players Features', type: :feature) do
       end
 
       it 'new player has negative losses' do
-        click_on 'Add a New Player'
+        click_on 'New Player'
         fill_in_form('Bossman', '-5', '3', '', '', '')
         click_on 'Submit'
 
@@ -199,7 +199,7 @@ RSpec.describe('Players Features', type: :feature) do
       end
 
       it 'new player has losses just out of bounds from above' do
-        click_on 'Add a New Player'
+        click_on 'New Player'
         fill_in_form('Bossman', '2147483648', '3', '', '', '')
         click_on 'Submit'
 
@@ -211,7 +211,7 @@ RSpec.describe('Players Features', type: :feature) do
       end
 
       it 'new player has negative wins' do
-        click_on 'Add a New Player'
+        click_on 'New Player'
         fill_in_form('Bossman', '3', '-5', '', '', '')
         click_on 'Submit'
 
@@ -223,7 +223,7 @@ RSpec.describe('Players Features', type: :feature) do
       end
 
       it 'new player has wins just out of bounds from above' do
-        click_on 'Add a New Player'
+        click_on 'New Player'
         fill_in_form('Bossman', '3', '2147483648', '', '', '')
         click_on 'Submit'
 
@@ -235,7 +235,7 @@ RSpec.describe('Players Features', type: :feature) do
       end
 
       it 'new player has negative losses & wins' do
-        click_on 'Add a New Player'
+        click_on 'New Player'
         fill_in_form('Bossman', '-3', '-5', '', '', '')
         click_on 'Submit'
 
