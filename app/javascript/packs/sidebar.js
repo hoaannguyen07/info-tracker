@@ -1,61 +1,71 @@
 "use strict";
 
-console.log("Sidebar JS file loaded but nothing is done here")
-
 if (document.readyState !== "loading") {
-	console.log("Not loading yet");
 	onReady();
 } else {
-	console.log("Loading RN");
 	document.addEventListener("DOMContentLoaded", onReady);
 }
 
-const showNavbar = (toggleId, navId, bodyId, headerId) =>{
-	const toggle = document.getElementById(toggleId),
-	nav = document.getElementById(navId),
-	bodypd = document.getElementById(bodyId),
-	headerpd = document.getElementById(headerId);
-	console.log(toggle);
-	console.log(nav);
-	console.log(bodypd);
-	console.log(headerpd);
-	
+const toggleNavbar = (toggle, nav, headerpd) =>{
 	// Validate that all variables exist
-	if(toggle && nav && bodypd && headerpd){
+	if(toggle && nav && headerpd){
 		toggle.addEventListener('click', ()=>{
-		// show navbar
-		nav.classList.toggle('show')
-		// change icon
-		toggle.classList.toggle('bx-x')
-		// add padding to body
-		// bodypd.classList.toggle('body-pd')
-		// add padding to header
-		headerpd.classList.toggle('body-pd')
-
-		console.log("Added Toggle Function");
+			// show navbar
+			nav.classList.toggle('show')
+			// change icon
+			toggle.classList.toggle('bx-x')
+			// add padding to header
+			headerpd.classList.toggle('body-pd')
 		})
 	}
-	console.log("Show Nav Bar Ran");
 }
 
+function setCurrentTab(navLinkColor)
+{
+	// set cur_tab if there are no save cur_tab or if cur_tab is empty/undefined
+	if (localStorage.length == 0 || !localStorage.getItem('cur_tab'))
+	{
+		localStorage.setItem('cur_tab', 'home-tab');
+	}
 
-
+	// load the current active tab (home tab when just logged in)
+	if(navLinkColor){
+		navLinkColor.forEach(l=> l.classList.remove('active'))
+		const cur_tab = document.getElementById(localStorage.getItem('cur_tab'));
+		cur_tab.classList.add('active');
+	}
+}
 
 function onReady() {
+	const toggle = document.getElementById('header-toggle'),
+	nav = document.getElementById('nav-bar'),
+	headerpd = document.getElementById('header');
+
+	toggleNavbar(toggle, nav, headerpd)
 	
-	console.log("Getting ready");
-	showNavbar('header-toggle','nav-bar','body-pd','header')
-	
+	const navLinkColor = document.querySelectorAll('.tab')
+	setCurrentTab(navLinkColor);
+
 	/*===== LINK ACTIVE =====*/
-	const linkColor = document.querySelectorAll('.nav_link')
+	function colorLink() {
+		if (navLinkColor) {
+			// delete all active tabs
+			navLinkColor.forEach(l => l.classList.remove('active'));
+			// get the tab that is clicked on and save it localled for reloading
+			const cur_tab = (this.id != 'root-tab') ? this.id : 'home-tab';
+			localStorage.setItem('cur_tab', cur_tab);
+
+			// add "active" class to tab being clicked on to get active to appear sooner visually though it will load again after
+			// redirect
+			document.getElementById(cur_tab).classList.add('active');
 	
-	function colorLink(){
-		if(linkColor){
-			linkColor.forEach(l=> l.classList.remove('active'))
-			this.classList.add('active')
 		}
-		console.log("Color Link ran");
+		event.stopPropagation();
 	}
-	
-	linkColor.forEach(l=> l.addEventListener('click', colorLink))
+
+	navLinkColor.forEach(l => l.addEventListener('click', colorLink))	
 }
+
+
+
+
