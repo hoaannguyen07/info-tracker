@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Image Gallery</h1>
+
+<div class="grid-container">
+  <div class="grid-cell">
+    <% @images.each do |image| %>
+      <%= link_to image_tag(image.img.variant(resize_to_limit: [400, 300])), edit_image_path(image) %>
+    <% end %>
+  </div>
+</div>
+
+<br>
+
+<%= link_to 'Add a New Image', new_image_path %>

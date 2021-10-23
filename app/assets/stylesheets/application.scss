@@ -104,6 +104,18 @@ caption {
     margin-right: 0.05rem;
 }
 
+.grid-container {
+    display: grid;
+    grid-template-areas: "a a";
+    grid-auto-rows: 25px;
+}
+
+.grid-cell {
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+    padding: 4rem;
+}
 
 :root {
     --header-height: 3rem;
