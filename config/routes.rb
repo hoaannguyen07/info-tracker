@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   #   root 'login#index'
   resources :players
   resources :images
+  resources :events
 
   get 'login/index'
   get 'users/main'
