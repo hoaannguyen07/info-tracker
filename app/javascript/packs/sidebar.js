@@ -7,6 +7,9 @@ if (document.readyState !== "loading") {
 }
 
 const toggleNavbar = (toggle, nav, headerpd) =>{
+	console.log(toggle);
+	console.log(nav);
+	console.log(headerpd);
 	// Validate that all variables exist
 	if(toggle && nav && headerpd){
 		toggle.addEventListener('click', ()=>{
@@ -16,6 +19,10 @@ const toggleNavbar = (toggle, nav, headerpd) =>{
 			toggle.classList.toggle('bx-x')
 			// add padding to header
 			headerpd.classList.toggle('body-pd')
+
+			console.log(toggle);
+			console.log(nav);
+			console.log(headerpd);
 		})
 	}
 }
@@ -41,7 +48,7 @@ function onReady() {
 	nav = document.getElementById('nav-bar'),
 	headerpd = document.getElementById('header');
 
-	toggleNavbar(toggle, nav, headerpd)
+	toggleNavbar(toggle, nav, headerpd);
 	
 	const navLinkColor = document.querySelectorAll('.tab')
 	setCurrentTab(navLinkColor);

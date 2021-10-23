@@ -18,13 +18,7 @@ body {
     font-family: 'Merriweather', sans-serif;
 }
 
-bg-maroon {
-    background-color: maroon;
-}
 
-.page-top-margin {
-    margin-top: 10px;
-}
 
 h1,
 h2 {
@@ -97,11 +91,13 @@ caption {
 .edit {
     margin-right: 0.2rem;
     margin-left: 0.05rem;
+    color: #007185;
 }
 
 .delete {
     margin-left: 0.2rem;
     margin-right: 0.05rem;
+    color: red;
 }
 
 
@@ -120,6 +116,13 @@ caption {
 ::before,
 ::after {
     box-sizing: border-box
+}
+
+.page-top-margin {
+    margin-top: calc(var(--header-height) + 1rem);
+    padding-top: 25px;
+    padding-bottom: 10px;
+    padding-left: 0px !important
 }
 
 body {
