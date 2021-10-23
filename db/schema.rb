@@ -53,17 +53,17 @@ ActiveRecord::Schema.define(version: 2021_10_15_181557) do
     t.index ["email"], name: "index_admins_on_email", unique: true
   end
 
-  create_table "images", force: :cascade do |t|
-    t.string "caption"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.string "location"
     t.datetime "time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "caption"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
