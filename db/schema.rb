@@ -57,8 +57,8 @@ ActiveRecord::Schema.define(version: 2021_10_18_200224) do
     t.index ["admin_id"], name: "index_players_on_admin_id"
   end
 
+  add_foreign_key "permission_users", "admins", column: "created_by_id"
+  add_foreign_key "permission_users", "admins", column: "updated_by_id"
+  add_foreign_key "permission_users", "admins", column: "user_id_id"
   add_foreign_key "permission_users", "permissions", column: "permissions_id_id"
-  add_foreign_key "permission_users", "players", column: "created_by_id"
-  add_foreign_key "permission_users", "players", column: "updated_by_id"
-  add_foreign_key "permission_users", "players", column: "user_id_id"
 end

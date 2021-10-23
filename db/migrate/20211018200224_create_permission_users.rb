@@ -9,9 +9,9 @@ class CreatePermissionUsers < ActiveRecord::Migration[6.1]
       t.timestamps
     end
 
-    add_foreign_key :permission_users, :players, column: "user_id_id"
-    add_foreign_key :permission_users, :players, column: "created_by_id"
-    add_foreign_key :permission_users, :players, column: "updated_by_id"
+    add_foreign_key :permission_users, :admins, column: "user_id_id"
+    add_foreign_key :permission_users, :admins, column: "created_by_id"
+    add_foreign_key :permission_users, :admins, column: "updated_by_id"
     add_foreign_key :permission_users, :permissions, column: "permissions_id_id" 
   end
 end

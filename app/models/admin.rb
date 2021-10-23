@@ -15,6 +15,13 @@ class Admin < ApplicationRecord
     end
 
     has_many :players, dependent: :destroy
+    has_many :permissions, class_name: 'PermissionUser', foreign_key: 'user_id_id', dependent: :destroy, inverse_of: :user_id
+    has_many :permissions_created, class_name: 'PermissionUser', foreign_key: 'created_by_id', dependent: :destroy, inverse_of: :created_by
+    has_many :permissions_updated, class_name: 'PermissionUser', foreign_key: 'updated_by_id', dependent: :destroy, inverse_of: :updated_by
+
+    def permissions
+        PermissionUser.where(user_id_id: id)
+    end
 
     validates :email, :full_name, presence: true
 
