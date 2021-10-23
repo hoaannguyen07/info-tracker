@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<% if @image.img.attached? %>
+  <%= image_tag @image.img, style: "width: 1000px; display: block" %>
+<% end %>
+
+<p>
+  <strong>Caption:</strong>
+  <%= @image.caption %>
+</p>
+
+<%= link_to 'Edit', edit_image_path(@image) %> |
+<%= link_to 'Back', images_path %>
