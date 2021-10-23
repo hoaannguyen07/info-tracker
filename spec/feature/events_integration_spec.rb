@@ -31,15 +31,11 @@ RSpec.describe('Events Features', type: :feature) do
   end
 
   def edit_event(event_id)
-    within('table') do
-      find("a[href=\"/events/#{event_id}/edit\"]").click
-    end
+    find("#edit-event-#{event_id}").click
   end
 
   def delete_event(event_id)
-    within('.actions') do
-      find("a[href=\"/events/#{event_id}\"]").click
-    end
+    find("#delete-event-#{event_id}").click
   end
 
   def fill_in_form(name, description, location, time)

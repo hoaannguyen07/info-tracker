@@ -1,15 +1,15 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Image Gallery</h1>
-
-<div class="grid-container">
-  <div class="grid-cell">
-    <% @images.each do |image| %>
-      <%= link_to image_tag(image.img.variant(resize_to_limit: [400, 300])), edit_image_path(image) %>
-    <% end %>
+<div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
+  <h1>Image Gallery</h1>
+  <%= button_to "New Image", new_image_path, class: 'btn btn-secondary', :method => :get%>
+  <br/>
+  <div class="grid-container">
+    <div class="grid-cell">
+      <% @images.each do |image| %>
+        <%= link_to image_tag(image.img.variant(resize_to_limit: [350, 250])), edit_image_path(image) %>
+      <% end %>
+    </div>
   </div>
+
+  <br/>
+
 </div>
-
-<br>
-
-<%= link_to 'Add a New Image', new_image_path %>
