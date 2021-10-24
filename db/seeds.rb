@@ -7,4 +7,5 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Permission.create!(description: 'admin')
+Permission.create(description: 'admin')
+PermissionUser.create(user_id_id: 1, permissions_id_id: 1, created_by_id: 1, updated_by_id: 1)

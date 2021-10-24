@@ -16,8 +16,8 @@ class PermissionUsersController < ApplicationController
     @permission_users = PermissionUser.all
     if @permission_users.exists?(user_id_id: params[:user_id],
                                  permissions_id_id: params[:permission_id]
-                                ) || (params[:created_by] != current_admin.id)
-
+                                ) 
+		puts('testeees')
       respond_to do |format|
         format.html { redirect_to('/permission_users', notice: 'The user already has that permission!') }
         format.json { render(json: @permission.errors, status: :unprocessable_entity) }
@@ -42,7 +42,6 @@ class PermissionUsersController < ApplicationController
   end
 
   def destroy
-    # @permission_users.destroy(self.inspect)
     @permission_users.destroy(@permission_users.where(user_id_id: params[:user_id], permissions_id_id: params[:permission_id]))
   end
   helper_method :destroy
