@@ -19,4 +19,22 @@ class Admin < ApplicationRecord
   validates :email, :full_name, presence: true
 
   validates :email, uniqueness: { case_sensitive: false }
+
+  def self.info(current_admin)
+    return Admin.where(email: current_admin.email).first unless current_admin.nil?
+
+    nil
+  end
+
+  def self.id(current_admin)
+    return Admin.where(email: current_admin.email).first.id unless current_admin.nil?
+
+    nil
+  end
+
+  def self.name_given_id(id)
+    return Admin.where(id: id).first.full_name unless id.nil?
+
+    nil
+  end
 end
