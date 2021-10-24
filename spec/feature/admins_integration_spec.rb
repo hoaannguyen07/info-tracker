@@ -50,23 +50,43 @@ RSpec.describe('Authentication', type: :feature) do
     expect(page).to(have_current_path(root_path || stored_location_for(resource_or_scope)))
   end
 
-  it 'Sign out redirects to login screen' do
+  it 'Sign out using nav bar redirects to login screen' do
     visit root_path
 
     # sign in and verify sign in
     click_on 'Get Started!'
 
-    click_on 'Sign Out'
+    find('#sign-out-nav-bar').click
     expect(page).to(have_content('Signed out successfully.'))
   end
 
-  it 'Sign out redirects to new_admin_session_path' do
+  it 'Sign out using nav bar redirects to new_admin_session_path' do
     visit root_path
 
     # sign in and verify sign in
     click_on 'Get Started!'
 
-    click_on 'Sign Out'
+    find('#sign-out-nav-bar').click
+    expect(page).to(have_current_path(new_admin_session_path))
+  end
+
+  it 'Sign out using side bar redirects to login screen' do
+    visit root_path
+
+    # sign in and verify sign in
+    click_on 'Get Started!'
+
+    find('#sign-out-side-bar').click
+    expect(page).to(have_content('Signed out successfully.'))
+  end
+
+  it 'Sign out using side bar redirects to new_admin_session_path' do
+    visit root_path
+
+    # sign in and verify sign in
+    click_on 'Get Started!'
+
+    find('#sign-out-side-bar').click
     expect(page).to(have_current_path(new_admin_session_path))
   end
 end

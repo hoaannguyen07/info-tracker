@@ -17,6 +17,8 @@
   <%= form.text_field :name, class: 'form-control', rows: '3', placeholder: 'Enter Player Name'%>
 </div>
 
+<br/>
+
 <div class="row">
   <div class="form-group col-md-2">
     <%= form.label :wins, class: 'form-label'%>
@@ -28,6 +30,8 @@
   </div>
 </div>
 
+<br/>
+
 <div class="form-group">
   <%= form.label :strengths, class: 'form-label' %>
   <%= form.text_area :strengths, class: 'form-control', placeholder: 'What are some strengths?'%>
@@ -38,6 +42,8 @@
   <%= form.text_area :weaknesses, class: 'form-control', placeholder: 'What are some weaknesses?'%>
 </div>
 
+<br/>
+
 <div class="form-group">
   <%= form.label :additional_info, class: 'form-label'%>
   <%= form.text_area :additional_info, class: 'form-control', placeholder: 'Any additional information?'%>
@@ -46,5 +52,7 @@
 <br>
 
 <button type='submit' class='btn btn-secondary'>Submit</button>
+
+<br/>
 
 <% end %>

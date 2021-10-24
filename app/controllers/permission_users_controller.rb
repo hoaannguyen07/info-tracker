@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PermissionUsersController < ApplicationController
-    before_action :set_permission_user, only: %i[show destroy]
+    before_action :set_permission_user, only: %i[destroy]
 
     def index
         @admins = Admin.all
@@ -10,60 +10,32 @@ class PermissionUsersController < ApplicationController
     end
 
     # creates a new active record on the permission_users 
-    # table with this example path => /permission_users/new?permission_id=(:id)&user_id=(:id)
+    # table with the resourceful path below
+    # /permission_users/new?permission_id=(:id)&user_id=(:id)&created_by=(:id)&updated_by=(:id)
     def new
-        @permissions = Permission.all
-        @admins = Admin.all
-        # if @permission_users.find(user_id_id: @admins.find(params[:user_id]), permissions_id_id: params[:permission_id] )
-        #   puts('testing')
-        # end
-        @permission_user = PermissionUser.new(user_id_id: (params[:user_id]),
-                                              created_by_id: params[:user_id],
-                                              updated_by_id: params[:user_id],
-                                              permissions_id_id: params[:permission_id]
-                                             )
-        # @user = Admin.find(params[:user_id])
-        # @permission_user = PermissionUser.new(permission_user_params)
+        @permission_users = PermissionUser.all
+        if @permission_users.where(user_id_id: params[:user_id], permissions_id_id: params[:permission_id] ).exists? or (params[:created_by] != current_admin.id)
+          respond_to do |format|
+            format.html { redirect_to('/permission_users', notice: 'The user already has that permission!') }
+            format.json { render(json: @permission.errors, status: :unprocessable_entity) }
+          end
+        else 
+            @permission_user = PermissionUser.new(user_id_id: (params[:user_id]),
+                                                created_by_id: params[:created_by],
+                                                updated_by_id: params[:updated_by],
+                                                permissions_id_id: params[:permission_id]
+                                                )
 
-        respond_to do |format|
-            if @permission_user.save
-                format.html { redirect_to('/permission_users', notice: 'Permission User was successfully created.') }
-                format.json { render(:show, status: :created, location: @permission) }
-            else
-                format.html { render(:new, status: :unprocessable_entity) }
-                format.json { render(json: @permission.errors, status: :unprocessable_entity) }
+            respond_to do |format|
+                if @permission_user.save
+                    format.html { redirect_to('/permission_users', notice: 'The user\'s permission has been successfully updated!') }
+                    format.json { render(:show, status: :created, location: @permission) }
+                else
+                    format.html { render(:new, status: :unprocessable_entity) }
+                    format.json { render(json: @permission.errors, status: :unprocessable_entity) }
+                end
             end
         end
-    end
-
-    def create
-        @permissions = Permission.all
-        @admins = Admin.all
-        # if @permission_users.find(user_id_id: @admins.find(params[:user_id]), permissions_id_id: params[:permission_id] )
-        #   puts('testing')
-        # end
-        @permission_user = PermissionUser.new(user_id_id: @admins.find(params[:user_id]),
-                                              created_by_id: params[:user_id],
-                                              updated_by_id: params[:user_id],
-                                              permissions_id_id: params[:permission_id]
-                                             )
-        # @user = Admin.find(params[:user_id])
-        # @permission_user = PermissionUser.new(permission_user_params)
-
-        respond_to do |format|
-            if @permission_user.save
-                format.html { redirect_to('/permission_users', notice: 'Permission User was successfully created.') }
-                format.json { render(:show, status: :created, location: @permission) }
-            else
-                format.html { render(:new, status: :unprocessable_entity) }
-                format.json { render(json: @permission.errors, status: :unprocessable_entity) }
-            end
-        end
-    end
-
-    def show
-        @permissions = Permission.all
-        @admins = Admin.all
     end
 
     def destroy
@@ -71,11 +43,4 @@ class PermissionUsersController < ApplicationController
         @permission_users.destroy(@permission_users.where(user_id_id: params[:user_id], permissions_id_id: params[:permission_id]))
     end
     helper_method :destroy
-
-    private
-
-    # Only allow a list of trusted paramaters through.
-    def permission_user_params
-        params.permit(:user_id, :created_by, :updated_by, :permissions_id)
-    end
 end

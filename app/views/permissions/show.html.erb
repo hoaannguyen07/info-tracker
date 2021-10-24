@@ -1,17 +1,23 @@
-<p id="notice"><%= notice %></p>
-<div class="container">
-  <div class="container page-top-margin">
-    <%= render 'back'%>
+<% if current_admin.admin?%>
+  <p id="notice"><%= notice %></p>
+  <div class="container">
+    <div class="container page-top-margin">
+      <%= render 'back'%>
+    </div>
+    <br>
+    <div class='align-self-center' style='text-align: center'>
+      <form>
+        <div class='align-self-center' style='text-align: center'>
+          <h1>Description</h1>
+          <div>
+          <%= @permission.description %>
+          </div>
+        </div> 
+      </form>
+    </div>
   </div>
-  <br>
-  <div class='align-self-center' style='text-align: center'>
-    <form>
-      <div class='align-self-center' style='text-align: center'>
-        <h1>Description</h1>
-        <div>
-        <%= @permission.description %>
-        </div>
-      </div> 
-    </form>
-  </div>
-</div>
+<% else %>
+    <div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
+        <h1>You are not an admin! Better luck next time!</h1>
+    </div>
+<% end %>

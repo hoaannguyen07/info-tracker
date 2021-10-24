@@ -1,58 +1,64 @@
-<div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
-  <a href=<%= permission_users_path%> class="back-button" id="back">
-    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-short" viewbox="0 0 16 16">
-      <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
-    </svg>
-    Back
-  </a>
-  <h1>Permissions</h1>
-  <div>
-    <table class="table table-striped table-bordered table-responsive table-font">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Description</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @permissions.each do |permission|%>
-          <tr class="center-vert-hor cell-pad">
-            <td>
-              <a href="/players/<%= permission.id%>">
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search search" viewbox="0 0 16 16">
-                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                </svg>
-                <%= permission.id %>
-              </a>
-            </td>
-            <td><%= permission.description %></td>
-            <td>
-              <div class="d-flex center-vert-hor actions">
-                <a href=<%= edit_permission_path(permission)%> class="edit">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-pen-fill edit" viewbox="0 0 16 16">
-                    <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
-                  </svg>
-                </a>
-                <br><br>
-                <a data-method="delete" href="/permissions/<%= permission.id%>" data-confirm="Are you sure?" class="delete">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash-fill delete" viewbox="0 0 16 16">
-                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                  </svg>
-                </a>
-              </div>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+<% if current_admin.admin?%>
+  <div class="container page-top-margin">
+    <form class="button_to" method="get" action=<%= permission_users_path %>>
+      <button class="btn back-button" id="back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-short back-button" viewbox="0 0 16 16">
+          <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+        </svg>
+        <span class="back-button">Back</span>
+      </button>
+    </form>
   </div>
+  <div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
+    <h1>Permissions</h1>
+    <div>
+      <table class="table table-striped table-bordered table-responsive table-font">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Description</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
 
-  <br>
-  
-  <%= button_to "Add a New Permission", new_permission_path, class: 'btn btn-secondary', :method => :get%>
-</div>
+        <tbody>
+          <% @permissions.each do |permission|%>
+            <tr class="center-vert-hor cell-pad">
+              <td>
+                <form class="button_to" method="get" action=<%= permission_path(permission) %>>
+                  <button class="btn" id="player-<%= permission.id %>">
+                    <span style="font-weight: bold"><%= permission.description %></span>
+                  </button>
+                </form>
+              </td>
+              <td>
+                <div class="d-flex center-vert-hor actions">
+                  <a href=<%= edit_permission_path(permission)%> class="edit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-pen-fill edit" viewbox="0 0 16 16">
+                      <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+                    </svg>
+                  </a>
+                  <br><br>
+                  <a data-method="delete" href="/permissions/<%= permission.id%>" data-confirm="Are you sure?" class="delete">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash-fill delete" viewbox="0 0 16 16">
+                      <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                    </svg>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
 
+    <br>
+    
+    <%= button_to "Add a New Permission", new_permission_path, class: 'btn btn-secondary', :method => :get%>
+  </div>
+<% else %>
+    <div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
+        <h1>You are not an admin! Better luck next time!</h1>
+    </div>
+<% end %>
 
 
