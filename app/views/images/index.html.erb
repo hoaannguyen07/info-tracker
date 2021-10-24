@@ -1,11 +1,15 @@
-<div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
-  <h1>Image Gallery</h1>
+<div class="d-flex flex-column align-items-center page-top-margin" style="height: 100%">
+  <h1>Photo Gallery</h1>
   <%= button_to "New Image", new_image_path, class: 'btn btn-secondary', :method => :get%>
   <br/>
   <div class="grid-container">
     <div class="grid-cell">
       <% @images.each do |image| %>
-        <%= link_to image_tag(image.img.variant(resize_to_limit: [350, 250])), edit_image_path(image) %>
+        <form class="button_to" method="get" action=<%= edit_image_path(image) %>>
+          <button class="btn" id="image-<%= image.id %>">
+            <%= image_tag(image.img, class: "gallery-image")%>
+          </button>
+        </form>
       <% end %>
     </div>
   </div>

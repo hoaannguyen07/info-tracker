@@ -113,6 +113,18 @@ caption {
     padding: 4rem;
 }
 
+.gallery-image {
+    max-width: 80vw;
+    max-height: 80vh;
+    margin: 10px 0px ;
+}
+
+.show-image {
+    max-width: 80vw;
+    max-height: 80vh;
+    margin: 10px 0px ;
+}
+
 :root {
     --header-height: 3rem;
     --nav-width: 68px;
@@ -144,10 +156,6 @@ body {
     font-family: var(--body-font);
     font-size: var(--normal-font-size);
     transition: .5s
-}
-
-a {
-    text-decoration: none
 }
 
 .header {
@@ -269,6 +277,10 @@ a {
     height: 100vh
 }
 
+.form-bottom-padding {
+    padding-bottom: 20px;
+}
+
 @media screen and (min-width: 768px) {
     body {
         margin: calc(var(--header-height) + 1rem) 0 0 0;
@@ -300,5 +312,10 @@ a {
 
     .body-pd {
         padding-left: calc(var(--nav-width) + 188px)
+    }
+
+    .gallery-image {
+        max-width: 40vw;
+        max-height: 40vh;
     }
 }
