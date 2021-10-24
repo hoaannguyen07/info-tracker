@@ -9,13 +9,40 @@ class PermissionUsersController < ApplicationController
         @permissions = Permission.all
     end
 
+    # creates a new active record on the permission_users 
+    # table with this example path => /permission_users/new?permission_id=(:id)&user_id=(:id)
     def new
         @permissions = Permission.all
         @admins = Admin.all
         # if @permission_users.find(user_id_id: @admins.find(params[:user_id]), permissions_id_id: params[:permission_id] )
         #   puts('testing')
         # end
-        @permission_user = PermissionUser.new(user_id: @admins.find(params[:user_id]),
+        @permission_user = PermissionUser.new(user_id_id: (params[:user_id]),
+                                              created_by_id: params[:user_id],
+                                              updated_by_id: params[:user_id],
+                                              permissions_id_id: params[:permission_id]
+                                             )
+        # @user = Admin.find(params[:user_id])
+        # @permission_user = PermissionUser.new(permission_user_params)
+
+        respond_to do |format|
+            if @permission_user.save
+                format.html { redirect_to('/permission_users', notice: 'Permission User was successfully created.') }
+                format.json { render(:show, status: :created, location: @permission) }
+            else
+                format.html { render(:new, status: :unprocessable_entity) }
+                format.json { render(json: @permission.errors, status: :unprocessable_entity) }
+            end
+        end
+    end
+
+    def create
+        @permissions = Permission.all
+        @admins = Admin.all
+        # if @permission_users.find(user_id_id: @admins.find(params[:user_id]), permissions_id_id: params[:permission_id] )
+        #   puts('testing')
+        # end
+        @permission_user = PermissionUser.new(user_id_id: @admins.find(params[:user_id]),
                                               created_by_id: params[:user_id],
                                               updated_by_id: params[:user_id],
                                               permissions_id_id: params[:permission_id]
