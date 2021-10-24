@@ -15,7 +15,7 @@ class Admin < ApplicationRecord
   end
 
   def admin?
-    return self.permissions.where(permissions_id_id: 1).exists?  
+    permissions.exists?(permissions_id_id: 1)
   end
 
   has_many :players, dependent: :destroy
