@@ -63,16 +63,16 @@ RSpec.describe('PermissionUsers Features', type: :feature) do
         expect(page).to(have_content('You are not an admin! Better luck next time!'))
     end
 
-    it 'is able to add permission to a given user' do
-        Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
-        sign_in
-        make_admin
-        puts('Admin.all', Admin.all.inspect)
-        puts('PermissionUser.all', PermissionUser.all.inspect)
-        visit permission_users_path
-        admin_id = Admin.where(email: 'userdoe@example.com').first.id
-        permission_id = Permission.where(description: 'admin').first.id
-        expect(page).to(have_content('Users'))
-        find("#add-permission-#{admin_id}-#{permission_id}").click
-    end
+    # it 'is able to add permission to a given user' do
+    #     Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+    #     sign_in
+    #     make_admin
+    #     puts('Admin.all', Admin.all.inspect)
+    #     puts('PermissionUser.all', PermissionUser.all.inspect)
+    #     visit permission_users_path
+    #     admin_id = Admin.where(email: 'userdoe@example.com').first.id
+    #     permission_id = Permission.where(description: 'admin').first.id
+    #     expect(page).to(have_content('Users'))
+    #     find("#add-permission-#{admin_id}-#{permission_id}").click
+    # end
 end

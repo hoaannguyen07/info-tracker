@@ -40,11 +40,11 @@ RSpec.describe('Events Features', type: :feature) do
     fill_in('event[name]', with: 'Tournament')
     fill_in('event[description]', with: 'Gig Em')
     fill_in('event[location]', with: 'Texas A&M')
-    fill_in('event[time]', with: '2021-10-18 23:38:00')
+    fill_in('event[time]', with: '2021-10-18 23:38:00 CDT')
     click_on('Submit')
 
     Event.where(name: 'Tournament', description: 'Gig Em', location: 'Texas A&M',
-                time: '2021-10-18 23:38:00'
+                time: '2021-10-18 23:38:00 CDT'
     ).first
   end
 
@@ -107,7 +107,7 @@ RSpec.describe('Events Features', type: :feature) do
         visit events_path
         click_on 'New Event'
         fill_in_form('Tournament', 'Gig Em', 'Texas A&M',
-                     '2021-10-18 23:38:00'
+                     '2021-10-18 23:38:00 CDT'
         )
         click_on 'Submit'
 
@@ -122,7 +122,7 @@ RSpec.describe('Events Features', type: :feature) do
         visit events_path
         click_on 'New Event'
         str = "`~1!2@3#4$5%6^7&8*9(0)-_=+qQwWeErRtTyYuUiIoOpP[{]}\|aAsSdDfFgGhHjJkKlL;:'\"zZxXcCvVbBnNmM,<.>/? \n\t "
-        fill_in_form('Bossman', str, str, '2021-10-18 23:38:00')
+        fill_in_form('Bossman', str, str, '2021-10-18 23:38:00 CDT')
         click_on 'Submit'
 
         visit events_path
@@ -206,7 +206,7 @@ RSpec.describe('Events Features', type: :feature) do
 
         visit events_path
         edit_event(created_event.id)
-        fill_in_form('Bossman', '91', '81', '2021-10-18 23:38:00')
+        fill_in_form('Bossman', '91', '81', '2021-10-18 23:38:00 CDT')
         click_on 'Submit'
 
         visit events_path
