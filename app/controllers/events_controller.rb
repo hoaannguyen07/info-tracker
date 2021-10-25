@@ -5,7 +5,7 @@ class EventsController < ApplicationController
 
   # GET /events or /events.json
   def index
-    @events = Event.order(time: :desc)
+    @events = Event.order(time: :asc)
   end
 
   # GET /events/1 or /events/1.json
