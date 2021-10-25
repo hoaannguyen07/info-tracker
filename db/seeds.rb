@@ -7,22 +7,21 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Permission.create!(description: 'admin')
-if Admin.where(email: 'matrev@tamu.edu').first.nil? == true
-  Admin.create!(email: 'matrev@tamu.edu', full_name: 'Mark Trevino', uid: '117972233671837615000', avatar_url: 'https://lh3.googleusercontent.com/a/AATXAJyTPeVQNjmwW71cuYem7Msi_KpuKOD0huwG1iBB=s96-c')
+Permission.create!(description: 'admin') if Permission.where(description: 'admin').first.nil? == true
+
+def seed_admin(email, full_name, uid, avatar_url)
+  Admin.create!(email: email, full_name: full_name, uid: uid, avatar_url: avatar_url) if Admin.where(email: email).first.nil? == true
+  if PermissionUser.where(permissions_id_id: Permission.where(description: 'admin').first.id,
+                          user_id_id: Admin.where(email: email).first.id
+                         ).first.nil? == true
+
+    PermissionUser.create!(permissions_id_id: Permission.where(description: 'admin').first.id,
+                           user_id_id: Admin.where(email: email).first.id,
+                           created_by_id: Admin.where(email: email).first.id,
+                           updated_by_id: Admin.where(email: email).first.id
+                          )
+  end
 end
 
-if Admin.where(email: 'hoaannguyen07@gmail.com').first.nil? == true
-  Admin.create!(email: 'hoaannguyen07@gmail.com', full_name: 'hoa nguyen', uid: '116423861261808432463', avatar_url: 'https://lh3.googleusercontent.com/a-/AOh14Gi1_Nq0U3QdPz9BM5iTF9FOvg0tBnBRblEqWVNV=s96-c')
-end
-
-if PermissionUser.where(permissions_id_id: Permission.where(description: 'admin').first.id,
-                        user_id_id: Admin.where(email: 'matrev@tamu.edu').first.id
-                       ).first.nil? == true
-
-  PermissionUser.create!(permissions_id_id: Permission.where(description: 'admin').first.id,
-                         user_id_id: Admin.where(email: 'matrev@tamu.edu').first.id,
-                         created_by_id: Admin.where(email: 'matrev@tamu.edu').first.id,
-                         updated_by_id: Admin.where(email: 'matrev@tamu.edu').first.id
-                        )
-end
+seed_admin('matrev@tamu.edu', 'Mark Trevino', '117972233671837615000', 'https://lh3.googleusercontent.com/a/AATXAJyTPeVQNjmwW71cuYem7Msi_KpuKOD0huwG1iBB=s96-c')
+seed_admin('hoaannguyen07@gmail.com', 'hoa nguyen', '116423861261808432463', 'https://lh3.googleusercontent.com/a-/AOh14Gi1_Nq0U3QdPz9BM5iTF9FOvg0tBnBRblEqWVNV=s96-c')
