@@ -6,7 +6,7 @@ RSpec.describe(Event, type: :model) do
   # pending "add some examples to (or delete) #{__FILE__}"
 
   subject(:test_event) do
-    described_class.new(name: 'Tournament', description: 'Gig Em', location: 'Texas A&M', time: '2021-10-18 23:38:00')
+    described_class.new(name: 'Tournament', description: 'Gig Em', location: 'Texas A&M', time: '2021-10-18 23:38:00 CDT CDT')
   end
 
   context 'with Event attribute(s)' do
