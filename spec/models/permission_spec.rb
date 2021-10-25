@@ -16,5 +16,10 @@ RSpec.describe(Permission, type: :model) do
       test_permission.description = nil
       expect(test_permission).not_to(be_valid)
     end
+
+    it 'is invalid with an invalid permission' do
+      test_permission.description = "!@#$%^&*()"
+      expect(test_permission).not_to(be_valid)
+    end
   end
 end
