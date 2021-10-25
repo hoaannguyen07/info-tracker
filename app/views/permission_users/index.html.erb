@@ -26,14 +26,14 @@
                                     <% if not(admin.permissions.where(user_id_id: admin.id, permissions_id_id: permission.id).exists?)%> 
                                         <%= button_to permission.description, new_permission_user_path, 
                                         params: { user_id: admin.id, permission_id: permission.id, 
-												created_by: current_admin.id, updated_by: current_admin.id },
+												created_by: Admin.id(current_admin), updated_by: Admin.id(current_admin) },
 												method: :get, class: 'btn btn-secondary' %>
                                     <% end %>
                                 <% end %>
                             </td>
                             <td>
                                 <% admin.permissions.each do |admin_permission| %>
-                                    <button class="btn btn-secondary" onclick=<%= puts("testing")%>>
+                                    <button class="btn btn-secondary">
                                         <%= @permissions.where(id: admin_permission.permissions_id_id).first.description%>
                                     </button>
                                 <% end %>

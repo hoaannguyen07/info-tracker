@@ -16,8 +16,8 @@ class PermissionUsersController < ApplicationController
     @permission_users = PermissionUser.all
     if @permission_users.exists?(user_id_id: params[:user_id],
                                  permissions_id_id: params[:permission_id]
-                                ) 
-		puts('testeees')
+                                )
+
       respond_to do |format|
         format.html { redirect_to('/permission_users', notice: 'The user already has that permission!') }
         format.json { render(json: @permission.errors, status: :unprocessable_entity) }

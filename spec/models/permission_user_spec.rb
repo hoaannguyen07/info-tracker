@@ -22,7 +22,7 @@ RSpec.describe(PermissionUser, type: :model) do
       end
 
       it 'is not valid with an invalid user_id' do
-        test_permission_user.user_id_id = 1234567890
+        test_permission_user.user_id_id = 1_234_567_890
         expect(test_permission_user).not_to(be_valid)
       end
     end
@@ -34,7 +34,7 @@ RSpec.describe(PermissionUser, type: :model) do
       end
 
       it 'is not valid with an invalid permissions_id_id' do
-        test_permission_user.permissions_id_id = 1234567890
+        test_permission_user.permissions_id_id = 1_234_567_890
         expect(test_permission_user).not_to(be_valid)
       end
     end
@@ -46,7 +46,7 @@ RSpec.describe(PermissionUser, type: :model) do
       end
 
       it 'is not valid with an invalid created_by_id' do
-        test_permission_user.created_by_id = 1234567890
+        test_permission_user.created_by_id = 1_234_567_890
         expect(test_permission_user).not_to(be_valid)
       end
     end
@@ -58,7 +58,7 @@ RSpec.describe(PermissionUser, type: :model) do
       end
 
       it 'is not valid with an invalid user_id' do
-        test_permission_user.updated_by_id = 1234567890
+        test_permission_user.updated_by_id = 1_234_567_890
         expect(test_permission_user).not_to(be_valid)
       end
     end

@@ -7,7 +7,7 @@ require 'selenium-webdriver'
 RSpec.describe('Players Features', type: :feature) do
   before do
     Rails.application.env_config['devise.mapping'] = Devise.mappings[:admin]
-    Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google]
+    Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_user]
     visit root_path
     # sign in and verify sign in
     click_on 'Get Started!'

@@ -104,10 +104,10 @@ ActiveRecord::Schema.define(version: 2021_10_24_195311) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "events", "admins", column: "created_by", on_delete: :nullify
+  add_foreign_key "events", "admins", column: "updated_by", on_delete: :nullify
   add_foreign_key "permission_users", "admins", column: "created_by_id"
   add_foreign_key "permission_users", "admins", column: "updated_by_id"
   add_foreign_key "permission_users", "admins", column: "user_id_id"
   add_foreign_key "permission_users", "permissions", column: "permissions_id_id"
-  add_foreign_key "events", "admins", column: "created_by", on_delete: :nullify
-  add_foreign_key "events", "admins", column: "updated_by", on_delete: :nullify
 end

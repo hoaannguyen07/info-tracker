@@ -6,7 +6,7 @@ require 'rails_helper'
 RSpec.describe('Authentication', type: :feature) do
   before do
     Rails.application.env_config['devise.mapping'] = Devise.mappings[:admin]
-    Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google]
+    Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_user]
   end
 
   it 'root page redirects to Sign in Page if not signed in' do
