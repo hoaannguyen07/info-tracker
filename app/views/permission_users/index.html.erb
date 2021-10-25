@@ -24,15 +24,15 @@
               <td>
                 <% @permissions.each do |permission| %>
                   <% if not(admin.permissions.where(user_id_id: admin.id, permissions_id_id: permission.id).exists?)%>
-                    <%= button_to permission.description,
-                      new_permission_user_path, 
-                      params: { user_id: admin.id, 
-                              permission_id: permission.id,
-                              created_by: Admin.id(current_admin),
-                              updated_by: Admin.id(current_admin) },
-                      method: :get, class: 'btn btn-secondary',
-                      :form => { :id => "add-permission-#{permission.id}-#{admin.id}" }
-                    %>
+                    <form class="button_to" method="get" action=<%= new_permission_user_path %>>
+                      <input type="hidden" name="user_id" value=<%= admin.id %>>
+                      <input type="hidden" name="permission_id" value=<%= permission.id %>>
+                      <input type="hidden" name="created_by" value=<%= Admin.id(current_admin) %>>
+                      <input type="hidden" name="updated_by" value=<%= Admin.id(current_admin) %>>
+                      <button class="btn" id="add-permission-<%= admin.id %>-<%= permission.id %>">
+                        <%= permission.description%>
+                      </button>
+                    </form>
                   <% end %>
                 <% end %>
               </td>
