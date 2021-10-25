@@ -14,10 +14,6 @@ class Admin < ApplicationRecord
     create_with(uid: uid, full_name: full_name, avatar_url: avatar_url).find_or_create_by!(email: email)
   end
 
-  def admin?
-    permissions.exists?(permissions_id_id: 1)
-  end
-
   has_many :players, dependent: :destroy
   has_many :permissions, class_name: 'PermissionUser', foreign_key: 'user_id_id', dependent: :destroy, inverse_of: :user_id
   has_many :permissions_created, class_name: 'PermissionUser', foreign_key: 'created_by_id', dependent: :destroy, inverse_of: :created_by
@@ -43,5 +39,12 @@ class Admin < ApplicationRecord
     return Admin.where(id: id).first.full_name unless id.nil?
 
     nil
+  end
+
+  def self.current_user_admin?(current_admin)
+    user = Admin.where(email: current_admin.email).first
+    admin_permission = Permission.where(description: 'admin').first
+    user_permission = PermissionUser.where(user_id_id: user.id, permissions_id_id: admin_permission.id).first
+    user_permission.nil? == false
   end
 end

@@ -1,6 +1,6 @@
 <div class="d-flex flex-column align-items-center page-top-margin" style="height: 100%">
   <h1>Photo Gallery</h1>
-  <% if current_admin.admin? %>
+  <% if Admin.current_user_admin?(current_admin) %>
     <%= button_to "New Image", new_image_path, class: 'btn btn-secondary', :method => :get%>
   <% end %>
   <br/>

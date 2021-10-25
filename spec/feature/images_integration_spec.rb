@@ -12,6 +12,9 @@ RSpec.describe('Images Feautures', type: :feature) do
     unless Admin.where(email: 'admindoe@example.com').first.nil? == false
       Admin.create!(email: 'admindoe@example.com', full_name: 'Admin Doe', uid: '234567890', avatar_url: 'https://lh3.googleusercontent.com/url/photo.jpg')
     end
+    unless Admin.where(email: 'userdoe@example.com').first.nil? == false
+      Admin.create!(email: 'userdoe@example.com', full_name: 'User Doe', uid: '123456789', avatar_url: 'https://lh3.googleusercontent.com/url/photo.jpg')
+    end
   end
 
   def sign_in

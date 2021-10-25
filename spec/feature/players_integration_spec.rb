@@ -8,6 +8,10 @@ RSpec.describe('Players Features', type: :feature) do
   before do
     Rails.application.env_config['devise.mapping'] = Devise.mappings[:admin]
     Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_user]
+    Permission.create!(description: 'admin') if Permission.where(description: 'admin').first.nil?
+    unless Admin.where(email: 'userdoe@example.com').first.nil? == false
+      Admin.create!(email: 'userdoe@example.com', full_name: 'User Doe', uid: '123456789', avatar_url: 'https://lh3.googleusercontent.com/url/photo.jpg')
+    end
     visit root_path
     # sign in and verify sign in
     click_on 'Get Started!'

@@ -1,4 +1,4 @@
-<% if current_admin.admin? %>
+<% if Admin.current_user_admin?(current_admin) %>
   <div class="container">
     <div class="container page-top-margin">
       <%= render 'back'%>
@@ -15,9 +15,9 @@
     </div>
 
     <%# <%= link_to 'Show', @event %>
-  </div>
-<% else %>
-  <div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
-    <h1>You are not an admin! Better luck next time!</h1>
-  </div>
-<% end %>
+    </div>
+  <% else %>
+    <div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
+      <h1>You are not an admin! Better luck next time!</h1>
+    </div>
+  <% end %>

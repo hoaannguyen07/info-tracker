@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
   <h1>Events</h1>
-  <% if current_admin.admin?%>
+  <% if Admin.current_user_admin?(current_admin)%>
     <%= button_to "New Event", new_event_path, class: 'btn btn-secondary', :method => :get%>
   <% end %>
   <br/>
@@ -12,7 +12,7 @@
           <th scope="col" class="text-center">Name</th>
           <th scope="col" class="text-center">Location</th>
           <th scope="col" class="text-center">Time</th>
-          <% if current_admin.admin? %>
+          <% if Admin.current_user_admin?(current_admin) %>
             <th scope="col" class="text-center">Actions</th>
           <% end %>
         </tr>
@@ -30,7 +30,7 @@
             </td>
             <td><%= event.location %></td>
             <td><%= event.time.strftime("%m/%d/%Y, %I:%M %p %Z") %></td>
-            <% if current_admin.admin? %>
+            <% if Admin.current_user_admin?(current_admin) %>
               <td>
                 <div class="d-flex center-vert-hor actions">
                   <form class="button_to" method="get" action=<%= edit_event_path(event)%>>

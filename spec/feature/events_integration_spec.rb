@@ -12,6 +12,9 @@ RSpec.describe('Events Features', type: :feature) do
     unless Admin.where(email: 'admindoe@example.com').first.nil? == false
       Admin.create!(email: 'admindoe@example.com', full_name: 'Admin Doe', uid: '234567890', avatar_url: 'https://lh3.googleusercontent.com/url/photo.jpg')
     end
+    unless Admin.where(email: 'userdoe@example.com').first.nil? == false
+      Admin.create!(email: 'userdoe@example.com', full_name: 'User Doe', uid: '123456789', avatar_url: 'https://lh3.googleusercontent.com/url/photo.jpg')
+    end
   end
 
   def sign_in
@@ -71,6 +74,8 @@ RSpec.describe('Events Features', type: :feature) do
     Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
     make_admin
     sign_in
+    expect(page).to(have_content('Manage Users'))
+
     visit events_path
     expect(page).to(have_current_path(events_path))
     expect(page).to(have_content('Events'))
