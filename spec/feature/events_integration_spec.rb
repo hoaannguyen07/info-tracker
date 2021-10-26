@@ -7,14 +7,32 @@ require 'selenium-webdriver'
 RSpec.describe('Events Features', type: :feature) do
   before do
     Rails.application.env_config['devise.mapping'] = Devise.mappings[:admin]
-    Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google]
-    visit root_path
+    Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_user]
+    Permission.create!(description: 'admin') if Permission.where(description: 'admin').first.nil?
+    unless Admin.where(email: 'admindoe@example.com').first.nil? == false
+      Admin.create!(email: 'admindoe@example.com', full_name: 'Admin Doe', uid: '234567890', avatar_url: 'https://lh3.googleusercontent.com/url/photo.jpg')
+    end
+    unless Admin.where(email: 'userdoe@example.com').first.nil? == false
+      Admin.create!(email: 'userdoe@example.com', full_name: 'User Doe', uid: '123456789', avatar_url: 'https://lh3.googleusercontent.com/url/photo.jpg')
+    end
+  end
+
+  def sign_in
+    visit(root_path)
     # sign in and verify sign in
-    click_on 'Get Started!'
+    click_on('Get Started!')
 
     # start with fresh event database on every run
     Event.delete_all
-    visit root_path
+    visit(root_path)
+  end
+
+  def make_admin
+    user_id = Admin.where(email: 'admindoe@example.com').first.id
+    admin_permission_id = Permission.where(description: 'admin').first.id
+    if PermissionUser.where(user_id_id: user_id, permissions_id_id: admin_permission_id).first.nil?
+      PermissionUser.create!(user_id_id: user_id, permissions_id_id: admin_permission_id, created_by_id: user_id, updated_by_id: user_id)
+    end
   end
 
   def create_valid_event
@@ -46,12 +64,18 @@ RSpec.describe('Events Features', type: :feature) do
   end
 
   it 'is at root page after login' do
+    sign_in
     expect(page).to(have_current_path(root_path))
     expect(page).to(have_content('Players'))
     expect(page).to(have_selector(:link_or_button, 'New Player'))
   end
 
   it 'is able to go to events#index page and have correct event contents' do
+    Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+    make_admin
+    sign_in
+    expect(page).to(have_content('Manage Users'))
+
     visit events_path
     expect(page).to(have_current_path(events_path))
     expect(page).to(have_content('Events'))
@@ -60,14 +84,26 @@ RSpec.describe('Events Features', type: :feature) do
 
   describe('#new feature') do
     it 'is able to go to #new' do
+      Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+      make_admin
+      sign_in
       visit events_path
       expect(page).to(have_selector(:link_or_button, 'New Event'))
       click_on 'New Event'
       expect(page).to(have_current_path(new_event_path))
     end
 
+    it 'is NOT able to go to #new if NOT an admin' do
+      sign_in
+      visit events_path
+      expect(page).not_to(have_selector(:link_or_button, 'New Event'))
+    end
+
     context('when creating a event is successful') do
       it 'new event has valid attributes' do
+        Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+        make_admin
+        sign_in
         visit events_path
         click_on 'New Event'
         fill_in_form('Tournament', 'Gig Em', 'Texas A&M',
@@ -80,6 +116,9 @@ RSpec.describe('Events Features', type: :feature) do
       end
 
       it 'new event allows description and location to have special characters' do
+        Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+        make_admin
+        sign_in
         visit events_path
         click_on 'New Event'
         str = "`~1!2@3#4$5%6^7&8*9(0)-_=+qQwWeErRtTyYuUiIoOpP[{]}\|aAsSdDfFgGhHjJkKlL;:'\"zZxXcCvVbBnNmM,<.>/? \n\t "
@@ -93,6 +132,9 @@ RSpec.describe('Events Features', type: :feature) do
 
     context('when creating a event is unsuccessful') do
       it 'new event has invalid attributes' do
+        Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+        make_admin
+        sign_in
         visit events_path
         click_on 'New Event'
         fill_in_form('', 'Bossman', '-1', '')
@@ -103,6 +145,9 @@ RSpec.describe('Events Features', type: :feature) do
       end
 
       it 'new event has blank name' do
+        Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+        make_admin
+        sign_in
         visit events_path
         click_on 'New Event'
         fill_in_form('', 'Bossman', '10', '')
@@ -117,6 +162,9 @@ RSpec.describe('Events Features', type: :feature) do
       end
 
       it 'new event has blank time' do
+        Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+        make_admin
+        sign_in
         visit events_path
         click_on 'New Event'
         fill_in_form('', 'Bossman', '10', '')
@@ -134,6 +182,9 @@ RSpec.describe('Events Features', type: :feature) do
 
   describe('#edit feature') do
     it 'is able to edit a event' do
+      Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+      make_admin
+      sign_in
       visit events_path
       created_event = create_valid_event
 
@@ -147,6 +198,9 @@ RSpec.describe('Events Features', type: :feature) do
 
     context('when editing a event is successful') do
       it 'updated event has valid attributes' do
+        Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+        make_admin
+        sign_in
         visit events_path
         created_event = create_valid_event
 
@@ -169,6 +223,9 @@ RSpec.describe('Events Features', type: :feature) do
 
     context('when editing a event is unsuccessful') do
       it 'updated event has invalid attributes' do
+        Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+        make_admin
+        sign_in
         visit events_path
         created_event = create_valid_event
 
@@ -190,6 +247,9 @@ RSpec.describe('Events Features', type: :feature) do
 
   describe('#delete feature') do
     it 'is able to delete a event' do
+      Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+      make_admin
+      sign_in
       visit events_path
       created_event = create_valid_event
 

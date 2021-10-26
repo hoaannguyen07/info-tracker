@@ -44,13 +44,18 @@
             <i class='bx bx-user nav_icon'></i>
             <span class="nav_name">Profile</span>
           </a>
-        </a>
+          <% if Admin.current_user_admin?(current_admin) %>
+            <a href="/permission_users" class="nav_link tab" id="manage-users-tab">
+              <i class="bx bx-group nav_icon"></i>
+              <span class="nav_name">Manage Users</span>
+            </a>
+          <% end %>
+        </div>
       </div>
-    </div>
-    <a href=<%= destroy_admin_session_path %> class="nav_link" id="sign-out-side-bar">
-      <i class='bx bx-log-out nav_icon'></i>
-      <span class="nav_name">Sign Out</span>
-    </a>
-  </nav>
-</div>
+      <a href=<%= destroy_admin_session_path %> class="nav_link" id="sign-out-side-bar">
+        <i class='bx bx-log-out nav_icon'></i>
+        <span class="nav_name">Sign Out</span>
+      </a>
+    </nav>
+  </div>
 <% end %>

@@ -15,6 +15,9 @@ class Admin < ApplicationRecord
   end
 
   has_many :players, dependent: :destroy
+  has_many :permissions, class_name: 'PermissionUser', foreign_key: 'user_id_id', dependent: :destroy, inverse_of: :user_id
+  has_many :permissions_created, class_name: 'PermissionUser', foreign_key: 'created_by_id', dependent: :destroy, inverse_of: :created_by
+  has_many :permissions_updated, class_name: 'PermissionUser', foreign_key: 'updated_by_id', dependent: :destroy, inverse_of: :updated_by
 
   validates :email, :full_name, presence: true
 
@@ -36,5 +39,12 @@ class Admin < ApplicationRecord
     return Admin.where(id: id).first.full_name unless id.nil?
 
     nil
+  end
+
+  def self.current_user_admin?(current_admin)
+    user = Admin.where(email: current_admin.email).first
+    admin_permission = Permission.where(description: 'admin').first
+    user_permission = PermissionUser.where(user_id_id: user.id, permissions_id_id: admin_permission.id).first
+    user_permission.nil? == false
   end
 end
