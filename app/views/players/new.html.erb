@@ -1,13 +1,13 @@
 <div class="container">
-    <div>
-        <a href=<%= players_path%>>
-            <%= bootstrap_icon  "arrow-left", width: 36, height: 36 %>
-        </a>
-    </div> 
-    <center>
-        <h1>New Player</h1>
-    </center>
-    <div class="d-flex" style="justify-content: center">
-        <%= render 'form', player: @player %>
-    </div>
+  <div class="container page-top-margin">
+    <%= render 'back'%>
+  </div>
+  <div class="container center-text">
+    <h1>
+      New Player
+    </h1>
+  </div>
+  <div class="d-flex form-bottom-padding" style="justify-content: center">
+    <%= render 'form', player: @player %>
+  </div>
 </div>

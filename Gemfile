@@ -25,15 +25,19 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'
+
+# Azure blob storage gem setup and active storage
+gem 'active_storage_validations'
+gem 'activestorage-validator'
+gem 'azure-storage-blob'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'bootstrap', '~> 5.1.0'
-gem 'sassc-rails', '>= 2.1.0'
 gem 'jquery-rails'
+gem 'sassc-rails', '>= 2.1.0'
 
-gem 'bootstrap-icons-helper'
 gem 'rexml'
 
 # google oauth gems
@@ -51,6 +55,9 @@ group :development, :test do
   gem 'rubocop-performance'
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
+
+  # manage environment variables
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -75,7 +82,7 @@ group :test do
   gem 'webdrivers'
 
   # test coverage
-  gem 'simplecov', :require => false
+  gem 'simplecov', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
