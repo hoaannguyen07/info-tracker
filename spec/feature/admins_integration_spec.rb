@@ -6,13 +6,17 @@ require 'rails_helper'
 RSpec.describe('Authentication', type: :feature) do
   before do
     Rails.application.env_config['devise.mapping'] = Devise.mappings[:admin]
-    Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google]
+    Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_user]
+    Permission.create!(description: 'admin') if Permission.where(description: 'admin').first.nil?
+    unless Admin.where(email: 'userdoe@example.com').first.nil? == false
+      Admin.create!(email: 'userdoe@example.com', full_name: 'User Doe', uid: '123456789', avatar_url: 'https://lh3.googleusercontent.com/url/photo.jpg')
+    end
   end
 
   it 'root page redirects to Sign in Page if not signed in' do
     visit root_path
     # verify redirection & the page content to be the sign in page
-    expect(page).to(have_current_path('/admins/sign_in'))
+    expect(page).to(have_current_path(new_admin_session_path))
     expect(page).to(have_content('Welcome to the Table Tennis Opponent Tracker'))
     expect(page).to(have_selector(:link_or_button, 'Get Started!'))
   end
@@ -20,7 +24,7 @@ RSpec.describe('Authentication', type: :feature) do
   it 'players#index redirects to Sign in Page if not signed in' do
     visit players_path
     # verify redirection & the page content to be the sign in page
-    expect(page).to(have_current_path('/admins/sign_in'))
+    expect(page).to(have_current_path(new_admin_session_path))
     expect(page).to(have_content('Welcome to the Table Tennis Opponent Tracker'))
     expect(page).to(have_selector(:link_or_button, 'Get Started!'))
   end
@@ -28,7 +32,7 @@ RSpec.describe('Authentication', type: :feature) do
   it 'players#new redirects to Sign in Page if not signed in' do
     visit new_player_path
     # verify redirection & the page content to be the sign in page
-    expect(page).to(have_current_path('/admins/sign_in'))
+    expect(page).to(have_current_path(new_admin_session_path))
     expect(page).to(have_content('Welcome to the Table Tennis Opponent Tracker'))
     expect(page).to(have_selector(:link_or_button, 'Get Started!'))
   end
@@ -46,16 +50,47 @@ RSpec.describe('Authentication', type: :feature) do
 
     # sign in and verify sign in
     click_on 'Get Started!'
-    expect(page).to(have_current_path(root_path)) # root path is currently set to players#index, but that won't be part of the URL so can't compare to players_path
+    # root path is currently set to players#index, but that won't be part of the URL so can't compare to players_path
+    expect(page).to(have_current_path(root_path || stored_location_for(resource_or_scope)))
   end
 
-  it 'Sign out redirects to login screen' do
+  it 'Sign out using nav bar redirects to login screen' do
     visit root_path
 
     # sign in and verify sign in
     click_on 'Get Started!'
 
-    click_on 'Sign Out'
+    find('#sign-out-nav-bar').click
     expect(page).to(have_content('Signed out successfully.'))
+  end
+
+  it 'Sign out using nav bar redirects to new_admin_session_path' do
+    visit root_path
+
+    # sign in and verify sign in
+    click_on 'Get Started!'
+
+    find('#sign-out-nav-bar').click
+    expect(page).to(have_current_path(new_admin_session_path))
+  end
+
+  it 'Sign out using side bar redirects to login screen' do
+    visit root_path
+
+    # sign in and verify sign in
+    click_on 'Get Started!'
+
+    find('#sign-out-side-bar').click
+    expect(page).to(have_content('Signed out successfully.'))
+  end
+
+  it 'Sign out using side bar redirects to new_admin_session_path' do
+    visit root_path
+
+    # sign in and verify sign in
+    click_on 'Get Started!'
+
+    find('#sign-out-side-bar').click
+    expect(page).to(have_current_path(new_admin_session_path))
   end
 end
