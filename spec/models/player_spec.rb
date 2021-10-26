@@ -14,7 +14,7 @@ RSpec.describe(Player, type: :model) do
     if Admin.where(email: '123@gmail.com').first.nil? == true
       Admin.create!(email: '123@gmail.com', full_name: 'Hello World', uid: '123abc456', avatar_url: 'www.example.com')
     end
-    described_class.new(admin_id: Admin.where(email: '123@gmail.com').first.id, name: 'Test123', played: 0, wins: 0, strengths: 'HELLO', weaknesses: 'WORLD', additional_info: '!!!')
+    described_class.new(admin_id: Admin.where(email: '123@gmail.com').first.id, name: 'Test123', losses: 0, wins: 0, strengths: 'HELLO', weaknesses: 'WORLD', additional_info: '!!!')
   end
 
   context 'with Player attribute(s)' do
@@ -49,178 +49,229 @@ RSpec.describe(Player, type: :model) do
         expect(test_player).not_to(be_valid)
       end
 
-      it "is NOT valid with special characters except for spaces, '-', and '_'" do
-        # Invalids
-        test_player.name = 'fjdkslfj@'
-        expect(test_player).not_to(be_valid)
+      it 'is valid a space' do
+        test_player.name = 'harry potter'
 
-        test_player.name = 'fjdkslfj='
-        expect(test_player).not_to(be_valid)
+        expect(test_player).to(be_valid)
+      end
 
-        test_player.name = 'fjdk)slfj'
-        expect(test_player).not_to(be_valid)
+      it 'is valid a dash ("-")' do
+        test_player.name = 'harry-potter'
 
-        test_player.name = 'fjdks(lfj'
-        expect(test_player).not_to(be_valid)
+        expect(test_player).to(be_valid)
+      end
 
-        test_player.name = 'fjdk[slfj'
-        expect(test_player).not_to(be_valid)
+      it 'is valid an underscore ("_")' do
+        test_player.name = 'harry_potter'
 
-        test_player.name = 'fjdk]slfj'
-        expect(test_player).not_to(be_valid)
+        expect(test_player).to(be_valid)
+      end
 
-        test_player.name = 'fjdkslf{j'
-        expect(test_player).not_to(be_valid)
-
-        test_player.name = 'fjd}kslfj sdf'
-        expect(test_player).not_to(be_valid)
-
-        test_player.name = 'fjdk[slfj'
-        expect(test_player).not_to(be_valid)
-
+      it 'is NOT valid with an `' do
         test_player.name = '`fjdkslfj'
         expect(test_player).not_to(be_valid)
+      end
 
+      it 'is NOT valid with an ~' do
         test_player.name = 'fj~dkslfj'
         expect(test_player).not_to(be_valid)
+      end
 
+      it 'is NOT valid with an !' do
         test_player.name = '!fjdkslfj'
         expect(test_player).not_to(be_valid)
+      end
 
+      it 'is NOT valid with an @' do
         test_player.name = 'fjd@kslfj'
         expect(test_player).not_to(be_valid)
+      end
 
+      it 'is NOT valid with an #' do
         test_player.name = 'fjdk#slfj'
         expect(test_player).not_to(be_valid)
+      end
 
+      it 'is NOT valid with an $' do
         test_player.name = 'fjdks$lfj'
         expect(test_player).not_to(be_valid)
+      end
 
+      it 'is NOT valid with an %' do
         test_player.name = 'fjdks%lfj'
         expect(test_player).not_to(be_valid)
+      end
 
+      it 'is NOT valid with an ^' do
         test_player.name = 'fjdks^lfj'
         expect(test_player).not_to(be_valid)
+      end
 
+      it 'is NOT valid with an &' do
         test_player.name = '&'
         expect(test_player).not_to(be_valid)
+      end
 
+      it 'is NOT valid with an *' do
         test_player.name = 'fjdkslfj *'
         expect(test_player).not_to(be_valid)
+      end
 
-        test_player.name = '< fjdkslfj '
+      it 'is NOT valid with an )' do
+        test_player.name = 'fjdk)slfj'
         expect(test_player).not_to(be_valid)
+      end
 
-        test_player.name = '> >fjdkslfj '
+      it 'is NOT valid with an (' do
+        test_player.name = 'fjdks(lfj'
         expect(test_player).not_to(be_valid)
+      end
 
-        test_player.name = 'fjd,kslfj '
-        expect(test_player).not_to(be_valid)
-
-        test_player.name = 'fjdksl.fj '
-        expect(test_player).not_to(be_valid)
-
-        test_player.name = 'fjdkslfj ???'
-        expect(test_player).not_to(be_valid)
-
-        test_player.name = 'fjdksl/fj fdsfa'
-        expect(test_player).not_to(be_valid)
-
-        test_player.name = '\ \fjdkslfj '
-        expect(test_player).not_to(be_valid)
-
-        test_player.name = 'fjdkslfj |||'
-        expect(test_player).not_to(be_valid)
-
+      it 'is NOT valid with an +' do
         test_player.name = 'fjd+kslfj +'
         expect(test_player).not_to(be_valid)
+      end
 
+      it 'is NOT valid with an =' do
         test_player.name = '=fjdk=slfj='
         expect(test_player).not_to(be_valid)
+      end
 
-        # Valids
-        test_player.name = 'fjdkslfj-fsdlkfj'
-        expect(test_player).to(be_valid)
+      it 'is NOT valid with an [' do
+        test_player.name = 'fjdk[slfj'
+        expect(test_player).not_to(be_valid)
+      end
 
-        test_player.name = '___fjdkslfjf__sdl-kfj---'
-        expect(test_player).to(be_valid)
+      it 'is NOT valid with an ]' do
+        test_player.name = 'fjdk]slfj'
+        expect(test_player).not_to(be_valid)
+      end
+
+      it 'is NOT valid with an {' do
+        test_player.name = 'fjdkslf{j'
+        expect(test_player).not_to(be_valid)
+      end
+
+      it 'is NOT valid with an }' do
+        test_player.name = 'fjd}kslfj sdf'
+        expect(test_player).not_to(be_valid)
+      end
+
+      it 'is NOT valid with an \\' do
+        test_player.name = '\ \fjdkslfj '
+        expect(test_player).not_to(be_valid)
+      end
+
+      it 'is NOT valid with an |' do
+        test_player.name = 'fjdkslfj |||'
+        expect(test_player).not_to(be_valid)
+      end
+
+      it 'is NOT valid with an <' do
+        test_player.name = '< fjdkslfj '
+        expect(test_player).not_to(be_valid)
+      end
+
+      it 'is NOT valid with an >' do
+        test_player.name = '> >fjdkslfj '
+        expect(test_player).not_to(be_valid)
+      end
+
+      it 'is NOT valid with an ,' do
+        test_player.name = 'fjd,kslfj '
+        expect(test_player).not_to(be_valid)
+      end
+
+      it 'is NOT valid with an .' do
+        test_player.name = 'fjdksl.fj '
+        expect(test_player).not_to(be_valid)
+      end
+
+      it 'is NOT valid with an ?' do
+        test_player.name = 'fjdkslfj ???'
+        expect(test_player).not_to(be_valid)
+      end
+
+      it 'is NOT valid with an /' do
+        test_player.name = 'fjdksl/fj fdsfa'
+        expect(test_player).not_to(be_valid)
       end
     end
 
-    # TESTING PLAYED FIELD
-    context 'when PLAYED' do
-      it "is NOT valid without a 'played' input" do
-        test_player.played = nil
+    # TESTING LOSSES FIELD
+    context 'when LOSSES' do
+      it "is NOT valid without a 'losses' input" do
+        test_player.losses = nil
 
         expect(test_player).not_to(be_valid)
       end
 
       it 'is NOT valid with a non-numeric value' do
-        test_player.played = 'hello world'
+        test_player.losses = 'hello world'
         expect(test_player).not_to(be_valid)
 
-        test_player.played = 'csce'
+        test_player.losses = 'csce'
         expect(test_player).not_to(be_valid)
 
-        test_player.played = 'test123'
+        test_player.losses = 'test123'
         expect(test_player).not_to(be_valid)
 
-        test_player.played = '123test'
+        test_player.losses = '123test'
         expect(test_player).not_to(be_valid)
 
-        test_player.played = 'happy4958test'
+        test_player.losses = 'happy4958test'
         expect(test_player).not_to(be_valid)
 
-        test_player.played = '12.593sdfs'
+        test_player.losses = '12.593sdfs'
         expect(test_player).not_to(be_valid)
 
-        test_player.played = '34.sad34'
+        test_player.losses = '34.sad34'
         expect(test_player).not_to(be_valid)
       end
 
       it 'is NOT valid with a float' do
-        test_player.played = '140.2304'
+        test_player.losses = '140.2304'
         expect(test_player).not_to(be_valid)
 
-        test_player.played = '-140.2304'
+        test_player.losses = '-140.2304'
         expect(test_player).not_to(be_valid)
 
-        test_player.played = '--140.2304'
+        test_player.losses = '--140.2304'
         expect(test_player).not_to(be_valid)
       end
 
       it 'is NOT valid with a negative integer' do
-        test_player.played = '-12432'
+        test_player.losses = '-12432'
         expect(test_player).not_to(be_valid)
 
-        test_player.played = '---12432'
+        test_player.losses = '---12432'
         expect(test_player).not_to(be_valid)
       end
 
       it 'is NOT valid with a positive, just out of bounds of an integer in [0, 2,147,483,647] from below' do
-        test_player.played = '-1'
+        test_player.losses = '-1'
         expect(test_player).not_to(be_valid)
       end
 
       # max in int SQL is 2147483647
       it 'is NOT valid with a positive, just out of bounds of an integer in [0, 2,147,483,647] from above' do
-        test_player.played = '2147483648'
+        test_player.losses = '2147483648'
         expect(test_player).not_to(be_valid)
       end
 
       it 'is valid with a positive integer in [0, 2,147,483,647]' do
-        test_player.played = '+251234234'
+        test_player.losses = '+251234234'
         expect(test_player).to(be_valid)
       end
 
       it 'is valid with a positive integer in [0, 2,147,483,647] on the lower edge (0)' do
-        test_player.played = '0'
+        test_player.losses = '0'
         expect(test_player).to(be_valid)
       end
 
       # max in int SQL is 2147483647
       it 'is valid with a positive integer in [0, 2,147,483,647] on the upper edge (2147483647)' do
-        test_player.played = '2147483647'
+        test_player.losses = '2147483647'
         expect(test_player).to(be_valid)
       end
     end
@@ -230,15 +281,12 @@ RSpec.describe(Player, type: :model) do
       it "is NOT valid without a 'wins' input" do
         # make sure that play >= wins to make sure that doesn't play in roll in this test failing or succeeding
         # only test the functionality described
-        test_player.played = 1_000_000
 
         test_player.wins = nil
         expect(test_player).not_to(be_valid)
       end
 
       it 'is NOT valid with a non-numeric value' do
-        test_player.played = 1_000_000
-
         test_player.wins = 'hello world'
         expect(test_player).not_to(be_valid)
 
@@ -262,8 +310,6 @@ RSpec.describe(Player, type: :model) do
       end
 
       it 'is NOT valid with a float' do
-        test_player.played = 1_000_000
-
         test_player.wins = '140.2304'
         expect(test_player).not_to(be_valid)
 
@@ -275,8 +321,6 @@ RSpec.describe(Player, type: :model) do
       end
 
       it 'is NOT valid with a negative integer' do
-        test_player.played = 1_000_000
-
         test_player.wins = '-12432'
         expect(test_player).not_to(be_valid)
 
@@ -285,59 +329,29 @@ RSpec.describe(Player, type: :model) do
       end
 
       it 'is NOT valid with a positive, just out of bounds of an integer in [0, 2,147,483,647] from below' do
-        test_player.played = 1_000_000
-
         test_player.wins = '-1'
         expect(test_player).not_to(be_valid)
       end
 
       # max in int SQL is 2147483647
       it 'is NOT valid with a positive, just out of bounds of an integer in [0, 2,147,483,647] from above' do
-        test_player.played = 1_000_000
-
         test_player.wins = '2147483648'
         expect(test_player).not_to(be_valid)
       end
 
       it 'is valid with a positive integer in [0, 2,147,483,647]' do
-        test_player.played = 2_147_483_647
-
         test_player.wins = '+251234234'
         expect(test_player).to(be_valid)
       end
 
       it 'is valid with a positive integer in [0, 2,147,483,647] on the lower edge (0)' do
-        test_player.played = 1_000_000
-
         test_player.wins = '0'
         expect(test_player).to(be_valid)
       end
 
       # max in int SQL is 2147483647
       it 'is valid with a positive integer in [0, 2,147,483,647] on the upper edge (2147483647)' do
-        test_player.played = 2_147_483_647
-
         test_player.wins = '2147483647'
-        expect(test_player).to(be_valid)
-      end
-    end
-
-    context 'when comparing PLAYED and WINS' do
-      it 'is NOT valid when value for played is less than value for wins' do
-        test_player.played = 1
-        test_player.wins = 3
-        expect(test_player).not_to(be_valid)
-      end
-
-      it 'is valid when value for played is equal to value for wins' do
-        test_player.played = 5
-        test_player.wins = 5
-        expect(test_player).to(be_valid)
-      end
-
-      it 'is valid when value for played is greater than value for wins' do
-        test_player.played = 6
-        test_player.wins = 5
         expect(test_player).to(be_valid)
       end
     end
