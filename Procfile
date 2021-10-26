@@ -1,1 +1,1 @@
-release: rails app:update:bin & npm install & bundle install & rails db:migrate
+release: rake db:migrate && rake db:seed

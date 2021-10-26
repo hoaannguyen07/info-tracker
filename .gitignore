@@ -37,3 +37,5 @@ yarn-debug.log*
 
 # file containing google oauth env key
 /config/environments/development.rb
+
+.env
