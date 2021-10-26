@@ -45,7 +45,7 @@ Run the following code in Powershell if using windows or the terminal using Linu
 
 Install the app
 
-  `bundle install && npm install && rails db:create && rails db:migrate && bundle exec rake assets:precompile`
+  `bundle install && npm install && rails db:create && rails db:migrate && rails db:seed && bundle exec rake assets:precompile`
 
 Run the app
   `rails server --binding=0.0.0.0`
@@ -58,12 +58,20 @@ please look at the /config/environments/development.rb file
 
 ## Deployment ##
 
+Customer App: https://ttcinfotracker.herokuapp.com/
+
+Production App: https://table-tennis-info-tracker.herokuapp.com/
+
 Please go to this link and follow the directions:
 
 https://docs.google.com/document/d/1_aoIk1Mjbw8vhL84O23qKoUy2tRveq27AsUUaJmcKsA/edit?usp=sharing
 
 
 ## CI/CD ##
+
+For Continuous Integration, a workflow was created to run Rspec, Rubocop, and Brakeman upon every push and pull requests.
+
+For Continuous Deployment, auto-deploy on branch after Continuous Integration has passed on Heroku is enabled.
 
 Please go to this link and follow the directions:
 
