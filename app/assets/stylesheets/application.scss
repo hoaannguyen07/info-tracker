@@ -18,13 +18,7 @@ body {
     font-family: 'Merriweather', sans-serif;
 }
 
-bg-maroon {
-    background-color: maroon;
-}
 
-.page-top-margin {
-    margin-top: 10px;
-}
 
 h1,
 h2 {
@@ -72,7 +66,7 @@ caption {
 }
 
 .back-button {
-    text-decoration: none;
+    color: #0048CD;
 }
 
 .table-font {
@@ -97,11 +91,13 @@ caption {
 .edit {
     margin-right: 0.2rem;
     margin-left: 0.05rem;
+    color: #007185;
 }
 
 .delete {
     margin-left: 0.2rem;
     margin-right: 0.05rem;
+    color: red;
 }
 
 .grid-container {
@@ -115,6 +111,18 @@ caption {
     font-size: 3rem;
     text-align: center;
     padding: 4rem;
+}
+
+.gallery-image {
+    max-width: 80vw;
+    max-height: 80vh;
+    margin: 10px 0px ;
+}
+
+.show-image {
+    max-width: 80vw;
+    max-height: 80vh;
+    margin: 10px 0px ;
 }
 
 :root {
@@ -134,6 +142,13 @@ caption {
     box-sizing: border-box
 }
 
+.page-top-margin {
+    margin-top: calc(var(--header-height) + 1rem);
+    padding-top: 25px;
+    padding-bottom: 10px;
+    padding-left: 0px !important
+}
+
 body {
     position: relative;
     margin: var(--header-height) 0 0 0;
@@ -141,10 +156,6 @@ body {
     font-family: var(--body-font);
     font-size: var(--normal-font-size);
     transition: .5s
-}
-
-a {
-    text-decoration: none
 }
 
 .header {
@@ -266,6 +277,10 @@ a {
     height: 100vh
 }
 
+.form-bottom-padding {
+    padding-bottom: 20px;
+}
+
 @media screen and (min-width: 768px) {
     body {
         margin: calc(var(--header-height) + 1rem) 0 0 0;
@@ -297,5 +312,10 @@ a {
 
     .body-pd {
         padding-left: calc(var(--nav-width) + 188px)
+    }
+
+    .gallery-image {
+        max-width: 40vw;
+        max-height: 40vh;
     }
 }

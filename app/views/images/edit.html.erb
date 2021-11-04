@@ -1,6 +1,20 @@
-<h1>Editing Image</h1>
-
-<%= render 'form', image: @image %>
-
-<%= link_to 'Show', @image %> |
-<%= link_to 'Back', images_path %>
+<% if Admin.current_user_admin?(current_admin)%>
+  <div class="d-flex flex-column" style="height: 100%">
+    <div class="container page-top-margin">
+      <%= render 'back'%>
+    </div>
+    <div class="container center-text">
+      <h1>
+        Update Image
+      </h1>
+    </div>
+    <div class="d-flex form-bottom-padding" style="justify-content: center">
+      <br/>
+      <%= render 'form', image: @image %>
+    </div>
+  </div>
+<% else %>
+  <div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
+    <h1>You are not an admin! Better luck next time!</h1>
+  </div>
+<% end %>

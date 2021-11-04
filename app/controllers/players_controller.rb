@@ -5,8 +5,7 @@ class PlayersController < ApplicationController
 
   # GET /players or /players.json
   def index
-    user = Admin.where(email: current_admin.email).first
-    @players = Player.where(admin_id: user.id).order('name ASC')
+    @players = Player.where(admin_id: Admin.id(current_admin)).order('name ASC')
   end
 
   # GET /players/1 or /players/1.json
@@ -25,8 +24,7 @@ class PlayersController < ApplicationController
     @player = Player.new(player_params)
     # need to add admin id for the new player that is being created to indicate ownership of that player information
     # and let this user and only this user have access to that information when querying
-    user = Admin.where(email: current_admin.email).first
-    @player.admin_id = user.id
+    @player.admin_id = Admin.info(current_admin).id
 
     respond_to do |format|
       if @player.save

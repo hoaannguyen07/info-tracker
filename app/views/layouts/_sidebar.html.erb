@@ -1,52 +1,61 @@
 <header class="header" id="header">
-    <% if current_admin != nil %>
-        <div class="header_toggle">
-        <i class='bx bx-menu' id="header-toggle"></i>
-        </div>
-        
-        <div class="dropdown">
-            <a class="btn btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="<%= current_admin.avatar_url%>" width="40" height="40" class="rounded-circle">
-            </a>
+  <% if current_admin != nil %>
+    <div class="header_toggle">
+      <i class='bx bx-menu' id="header-toggle"></i>
+    </div>
 
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" href=<%= destroy_admin_session_path %>>Sign Out</a></li>
-            </ul>
-        </div>
-    <% end %>
+    <div class="dropdown">
+      <a class="btn btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown">
+        <img src="<%= current_admin.avatar_url%>" width="40" height="40" class="rounded-circle">
+      </a>
+
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li>
+          <a class="dropdown-item" href=<%= destroy_admin_session_path %> id="sign-out-nav-bar">Sign Out</a>
+        </li>
+      </ul>
+    </div>
+  <% end %>
 </header>
 <% if current_admin != nil %>
-    <div class="l-navbar" id="nav-bar">
+  <div class="l-navbar" id="nav-bar">
     <nav class="nav">
-        <div>
-        <a href="#" class="nav_logo">
-            <i class='bx bx-layer nav_logo-icon'></i>
-            <span class="nav_logo-name">Info Tracker</span>
-        </a>
+      <div>
         <div class="nav_list">
-            <a href="#" class="nav_link active">
-            <i class='bx bx-grid-alt nav_icon'></i>
+          <a href=<%= root_path %> class="nav_logo tab" id="root-tab">
+            <i class="fas fa-table-tennis nav_logo-icon"></i>
+            <span class="nav_logo-name">Info Tracker</span>
+          </a>
+        </div>
+        <div class="nav_list">
+          <a href=<%= players_path %> class="nav_link active tab" id="home-tab">
+            <i class="bi bi-house nav_icon"></i>
             <span class="nav_name">Home</span>
-            </a>
-            <a href="#" class="nav_link">
-            <i class='bx bx-user nav_icon'></i>
+          </a>
+          <a href=<%= events_path %> class="nav_link tab" id="events-tab">
+            <i class="bi bi-calendar4-event nav_icon"></i>
             <span class="nav_name">Events</span>
-            </a>
-            <a href="#" class="nav_link">
-            <i class='bx bx-message-square-detail nav_icon'></i>
+          </a>
+          <a href=<%= images_path %> class="nav_link tab" id="gallery-tab">
+            <i class="bi bi-images nav_icon"></i>
             <span class="nav_name">Gallery</span>
-            </a>
-            <a href="#" class="nav_link">
-            <i class='bx bx-bookmark nav_icon'></i>
+          </a>
+          <a href=<%= root_path %> class="nav_link tab" id="profile-tab">
+            <i class='bx bx-user nav_icon'></i>
             <span class="nav_name">Profile</span>
+          </a>
+          <% if Admin.current_user_admin?(current_admin) %>
+            <a href="/permission_users" class="nav_link tab" id="manage-users-tab">
+              <i class="bx bx-group nav_icon"></i>
+              <span class="nav_name">Manage Users</span>
             </a>
-            </a>
+          <% end %>
         </div>
-        </div>
-        <a href=<%= destroy_admin_session_path %> class="nav_link">
+      </div>
+      <a href=<%= destroy_admin_session_path %> class="nav_link" id="sign-out-side-bar">
         <i class='bx bx-log-out nav_icon'></i>
         <span class="nav_name">Sign Out</span>
-        </a>
+      </a>
     </nav>
-    </div>
+  </div>
 <% end %>

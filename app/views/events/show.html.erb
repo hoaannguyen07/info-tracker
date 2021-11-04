@@ -4,7 +4,7 @@
     <%= render 'back'%>
   </div>
   <br>
-  <div class="d-flex" style="justify-content: center">
+  <div class="d-flex form-bottom-padding" style="justify-content: center">
     <form>
       <div class='align-self-center' style="text-align: center">
         <h1><%= @event.name %></h1>
@@ -24,6 +24,16 @@
         <label for="timeInput" class="form-label">Time</label>
         <textarea id="timeInput" class="form-control" disabled="disabled" readonly="readonly"><%= @event.time.strftime("%m/%d/%Y, %I:%M %p %Z") %></textarea>
       </div>
+
+      <div class="form-group">
+        <label for="timeInput" class="form-label">Last Updated By</label>
+        <textarea type="text" id="descriptionsInput" class="form-control" disabled="disabled" readonly="readonly"><%= Admin.name_given_id(@event.updated_by)%></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="timeInput" class="form-label">Created By</label>
+        <textarea type="text" id="descriptionsInput" class="form-control" disabled="disabled" readonly="readonly"><%= Admin.name_given_id(@event.created_by)%></textarea>
+      </div>
     </form>
   </div>
-<div>
+  <div>
