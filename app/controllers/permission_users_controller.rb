@@ -40,7 +40,7 @@ class PermissionUsersController < ApplicationController
       end
     end
   end
-  
+
   # DELETE /permissions/1 or /permissions/1.json
   def destroy
     @permission_user.destroy!
