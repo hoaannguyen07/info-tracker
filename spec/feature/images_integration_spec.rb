@@ -35,6 +35,25 @@ RSpec.describe('Images Feautures', type: :feature) do
     end
   end
 
+  def upload_image
+    click_on('New Image')
+    attach_file('image[img]', Rails.root.join('spec/fixtures/files/good.png'))
+    fill_in('image[caption]', with: 'A Test Caption')
+    click_on('Submit')
+    visit(images_path)
+  end
+
+  def upload_get_image
+    click_on('New Image')
+    attach_file('image[img]', Rails.root.join('spec/fixtures/files/good.png'))
+    fill_in('image[caption]', with: 'A Test Caption')
+    click_on('Submit')
+
+    Image.where(
+      caption: 'A Test Caption'
+    ).first
+  end
+
   describe('#new feature') do
     it 'is able to go to #new' do
       Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
@@ -59,7 +78,6 @@ RSpec.describe('Images Feautures', type: :feature) do
         attach_file('image[img]', Rails.root.join('spec/fixtures/files/good.png'))
         fill_in('image[caption]', with: 'A Test Caption')
         click_on 'Submit'
-
         visit images_path
         expect(page).to(have_css("img[src$='good.png']"))
       end
@@ -210,5 +228,54 @@ RSpec.describe('Images Feautures', type: :feature) do
         expect(page).to(have_current_path(images_path))
       end
     end
+  end
+
+  describe('#show feature') do
+    it 'is able to go to #show' do
+      Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+      make_admin
+      sign_in
+      image = upload_get_image
+      visit images_path
+      click_on(id: "image-#{image.id}")
+      expect(page).to(have_current_path(image_path(image.id)))
+    end
+
+    it 'show image source matches image source from index' do
+      Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+      make_admin
+      sign_in
+      upload_image
+      find("img[src*='good.png']").click
+      expect(page).to(have_css("img[src$='good.png']"))
+    end
+
+    # it 'show image has alt text' do
+    #   Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+    #   make_admin
+    #   sign_in
+    #   image = upload_get_image
+    #   visit images_path
+    #   find("img[src*='good.png']").click
+    #   expect(find_by_id('id' + image.id.to_s)[:alt]).to have_content('A Test Caption')
+    # end
+
+    # it 'show image has no edit button for normal users' do
+    #   Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+    #   make_admin
+    #   sign_in
+    #   upload_image
+    #   visit images_path
+    #   expect(page).to(have_selector(:link_or_button, 'Edit'))
+    # end
+
+    # it 'show image has no delete button for normal users' do
+    #   Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+    #   make_admin
+    #   sign_in
+    #   upload_image
+    #   visit images_path
+    #   expect(page).to(have_selector(:link_or_button, 'Delete'))
+    # end
   end
 end
