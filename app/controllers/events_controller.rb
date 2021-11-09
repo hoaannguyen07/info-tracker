@@ -5,7 +5,7 @@ class EventsController < ApplicationController
 
   # GET /events or /events.json
   def index
-    @events = Event.all
+    @events = Event.order(time: :asc)
   end
 
   # GET /events/1 or /events/1.json
@@ -22,6 +22,8 @@ class EventsController < ApplicationController
   # POST /events or /events.json
   def create
     @event = Event.new(event_params)
+    # add person who created this event
+    @event.created_by = Admin.info(current_admin).id
 
     respond_to do |format|
       if @event.save
@@ -36,6 +38,9 @@ class EventsController < ApplicationController
 
   # PATCH/PUT /events/1 or /events/1.json
   def update
+    # add person who updated this event
+    @event.updated_by = Admin.info(current_admin).id
+
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to(@event, notice: 'Event was successfully updated.') }

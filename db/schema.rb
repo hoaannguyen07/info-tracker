@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_15_181557) do
+ActiveRecord::Schema.define(version: 2021_10_24_195311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,10 +60,31 @@ ActiveRecord::Schema.define(version: 2021_10_15_181557) do
     t.datetime "time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "created_by"
+    t.bigint "updated_by"
   end
 
   create_table "images", force: :cascade do |t|
     t.string "caption"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "permission_users", force: :cascade do |t|
+    t.bigint "user_id_id", null: false
+    t.bigint "created_by_id", null: false
+    t.bigint "updated_by_id", null: false
+    t.bigint "permissions_id_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_permission_users_on_created_by_id"
+    t.index ["permissions_id_id"], name: "index_permission_users_on_permissions_id_id"
+    t.index ["updated_by_id"], name: "index_permission_users_on_updated_by_id"
+    t.index ["user_id_id"], name: "index_permission_users_on_user_id_id"
+  end
+
+  create_table "permissions", force: :cascade do |t|
+    t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -83,4 +104,10 @@ ActiveRecord::Schema.define(version: 2021_10_15_181557) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "events", "admins", column: "created_by", on_delete: :nullify
+  add_foreign_key "events", "admins", column: "updated_by", on_delete: :nullify
+  add_foreign_key "permission_users", "admins", column: "created_by_id"
+  add_foreign_key "permission_users", "admins", column: "updated_by_id"
+  add_foreign_key "permission_users", "admins", column: "user_id_id"
+  add_foreign_key "permission_users", "permissions", column: "permissions_id_id"
 end

@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   end
   #   root 'login#index'
   resources :players
+  resources :permissions
+  resources :permission_users
   resources :images
   resources :events
 

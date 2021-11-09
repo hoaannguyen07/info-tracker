@@ -257,7 +257,7 @@ Metrics/AbcSize:
 
 Metrics/BlockLength:
     CountComments: false
-    Max: 50
+    Max: 60
     Exclude:
         - "**/spec/**/*"
         - "**/*.rake"
@@ -355,6 +355,9 @@ Style/ExplicitBlockArgument:
 
 Style/GlobalStdStream:
     Enabled: true
+
+Style/GuardClause:
+    Enabled: false
 
 Style/HashConversion: # (new in 1.10)
     Enabled: true
@@ -457,7 +460,7 @@ RSpec/ContextWording:
     Enabled: false
 
 RSpec/ExampleLength:
-    Max: 15
+    Max: 30
 
 RSpec/IdenticalEqualityAssertion: # (new in 2.4)
     Enabled: true
