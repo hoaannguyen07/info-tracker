@@ -44,7 +44,9 @@ class Admin < ApplicationRecord
   def self.current_user_admin?(current_admin)
     user = Admin.where(email: current_admin.email).first
     admin_permission = Permission.where(description: 'admin').first
-    user_permission = PermissionUser.where(user_id_id: user.id, permissions_id_id: admin_permission.id).first
-    user_permission.nil? == false
+    user_permission = nil
+    user_permission = PermissionUser.where(user_id_id: user.id, permissions_id_id: admin_permission.id).first if !user.nil? && !admin_permission.nil?
+
+    !user_permission.nil?
   end
 end
