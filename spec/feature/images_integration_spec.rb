@@ -249,33 +249,5 @@ RSpec.describe('Images Feautures', type: :feature) do
       find("img[src*='good.png']").click
       expect(page).to(have_css("img[src$='good.png']"))
     end
-
-    # it 'show image has alt text' do
-    #   Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
-    #   make_admin
-    #   sign_in
-    #   image = upload_get_image
-    #   visit images_path
-    #   find("img[src*='good.png']").click
-    #   expect(find_by_id('id' + image.id.to_s)[:alt]).to have_content('A Test Caption')
-    # end
-
-    # it 'show image has no edit button for normal users' do
-    #   Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
-    #   make_admin
-    #   sign_in
-    #   upload_image
-    #   visit images_path
-    #   expect(page).to(have_selector(:link_or_button, 'Edit'))
-    # end
-
-    # it 'show image has no delete button for normal users' do
-    #   Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
-    #   make_admin
-    #   sign_in
-    #   upload_image
-    #   visit images_path
-    #   expect(page).to(have_selector(:link_or_button, 'Delete'))
-    # end
   end
 end
