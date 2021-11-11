@@ -9,7 +9,7 @@
       <% @images.each do |image| %>
         <form class="button_to" method="get" action=<%= image_path(image) %>>
           <button class="btn" id="image-<%= image.id %>">
-            <%= image_tag(image.img, class: "gallery-image")%>
+            <%= image_tag(image.img, class: "gallery-image", alt: "Photo gallery image")%>
           </button>
         </form>
       <% end %>
