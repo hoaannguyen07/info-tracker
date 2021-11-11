@@ -10,11 +10,14 @@
     </div>
     <div class="d-flex form-bottom-padding" style="justify-content: center">
       <br/>
-      <%= render 'form', image: @image %>
+      <%= render 'edit_form', image: @image %>
     </div>
   </div>
 <% else %>
   <div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
-    <h1>You are not an admin! Better luck next time!</h1>
+    <h1 style="color: #ff0000">
+      PERMISSION DENIED
+    </h1>
+    <h2>You do not have the permission to acess this page!</h2>
   </div>
 <% end %>

@@ -60,7 +60,7 @@ RSpec.describe('PermissionUsers Features', type: :feature) do
     sign_in
     visit permission_users_path
     expect(page).not_to(have_content('Users'))
-    expect(page).to(have_content('You are not an admin! Better luck next time!'))
+    expect(page).to(have_content('PERMISSION DENIED'))
   end
 
   describe('#new feature') do
