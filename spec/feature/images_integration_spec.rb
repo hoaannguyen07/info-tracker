@@ -35,6 +35,25 @@ RSpec.describe('Images Feautures', type: :feature) do
     end
   end
 
+  def upload_image
+    click_on('New Image')
+    attach_file('image[img]', Rails.root.join('spec/fixtures/files/good.png'))
+    fill_in('image[caption]', with: 'A Test Caption')
+    click_on('Submit')
+    visit(images_path)
+  end
+
+  def upload_get_image
+    click_on('New Image')
+    attach_file('image[img]', Rails.root.join('spec/fixtures/files/good.png'))
+    fill_in('image[caption]', with: 'A Test Caption')
+    click_on('Submit')
+
+    Image.where(
+      caption: 'A Test Caption'
+    ).first
+  end
+
   describe('#new feature') do
     it 'is able to go to #new' do
       Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
@@ -59,7 +78,6 @@ RSpec.describe('Images Feautures', type: :feature) do
         attach_file('image[img]', Rails.root.join('spec/fixtures/files/good.png'))
         fill_in('image[caption]', with: 'A Test Caption')
         click_on 'Submit'
-
         visit images_path
         expect(page).to(have_css("img[src$='good.png']"))
       end
@@ -208,6 +226,87 @@ RSpec.describe('Images Feautures', type: :feature) do
         fill_in('image[caption]', with: nil)
         click_on 'Submit'
         expect(page).to(have_current_path(images_path))
+      end
+    end
+  end
+
+  describe('#show feature') do
+    it 'is able to go to #show' do
+      Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+      make_admin
+      sign_in
+      image = upload_get_image
+      visit images_path
+      click_on(id: "image-#{image.id}")
+      expect(page).to(have_current_path(image_path(image.id)))
+    end
+
+    it 'show image source matches image source from index' do
+      Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+      make_admin
+      sign_in
+      upload_image
+      find("img[src*='good.png']").click
+      expect(page).to(have_css("img[src$='good.png']"))
+    end
+  end
+
+  describe('#edit feature') do
+    it 'is able to go to #edit' do
+      Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+      make_admin
+      sign_in
+      image = upload_get_image
+      visit images_path
+      click_on(id: "image-#{image.id}")
+      expect(page).to(have_selector(:link_or_button, 'Edit'))
+      click_on('Edit')
+      expect(page).to(have_content('Update Image'))
+    end
+
+    context('when editing an image is successful') do
+      it 'is able to edit an image' do
+        Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+        make_admin
+        sign_in
+        image = upload_get_image
+        visit images_path
+        click_on(id: "image-#{image.id}")
+        expect(page).to(have_selector(:link_or_button, 'Edit'))
+        click_on('Edit')
+        fill_in('image[caption]', with: 'A Different Test Caption')
+        click_on('Submit')
+        expect(page).to(have_content('A Different Test Caption'))
+      end
+    end
+
+    context('when editing an image is unsuccessful') do
+      it 'is not able to update with too long of caption' do
+        Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+        make_admin
+        sign_in
+        image = upload_get_image
+        visit images_path
+        click_on(id: "image-#{image.id}")
+        expect(page).to(have_selector(:link_or_button, 'Edit'))
+        click_on('Edit')
+        fill_in('image[caption]', with: 'a' * 257)
+        click_on('Submit')
+        expect(page).to(have_content('Caption is too long (maximum is 256 characters)'))
+      end
+
+      it 'is not able to update with no caption' do
+        Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+        make_admin
+        sign_in
+        image = upload_get_image
+        visit images_path
+        click_on(id: "image-#{image.id}")
+        expect(page).to(have_selector(:link_or_button, 'Edit'))
+        click_on('Edit')
+        fill_in('image[caption]', with: nil)
+        click_on('Submit')
+        expect(page).to(have_content("Caption can't be blank"))
       end
     end
   end
