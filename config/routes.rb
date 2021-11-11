@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'help/index'
   root to: 'players#index'
   devise_for :admins, controllers: { omniauth_callbacks: 'admins/omniauth_callbacks' }
   devise_scope :admin do
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
   resources :images
   resources :events
 
+  get 'help/index'
   get 'login/index'
   get 'users/main'
   get 'users/notes'

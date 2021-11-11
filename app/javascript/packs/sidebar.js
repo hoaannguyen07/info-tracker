@@ -37,6 +37,8 @@ function setLocalStorageCurrentPath() {
 		localStorage.setItem('cur_tab', 'profile-tab');
 	} else if (cur_path.includes('permission')) {
 		localStorage.setItem('cur_tab', 'manage-users-tab');
+	} else if (cur_path.includes('help')) {
+		localStorage.setItem('cur_tab', 'help-tab');
 	} else { // root tab or home tab will show home tab as active
 		localStorage.setItem('cur_tab', 'home-tab');
 	}

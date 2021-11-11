@@ -1,0 +1,18 @@
+<div class="d-flex justify-content-center flex-column align-items-center" style="padding-top: 100px;">
+  <%if Admin.current_user_admin?(current_admin) %>
+    <div class="container">
+      <div class="container center-text">
+        <h1>Help</h1>
+        <a href="/maintenance_guide.pdf" target="_blank">
+          <h5>Maintenance Guide PDF</h5>
+        </a>
+      </div>
+
+    </div>
+  <% else %>
+    <h1 style="color: #ff0000">
+      PERMISSION DENIED
+    </h1>
+    <h2>You do not have the permission to acess this page!</h2>
+  <% end %>
+</div>
