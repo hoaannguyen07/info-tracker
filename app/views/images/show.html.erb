@@ -12,7 +12,7 @@
     <div class="align-self-center">
       <% if @image.img.attached? %>
         <div class="align-items-center container">
-          <%= image_tag(@image.img, class: "show-image")%>
+          <%= image_tag(@image.img, class: "show-image", alt: "Photo gallery image", id: 'id' + @image.id.to_s)%>
         </div>
         <br/>
       <% end %>
