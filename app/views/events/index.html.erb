@@ -29,7 +29,7 @@
               </form>
             </td>
             <td><%= event.location %></td>
-            <td><%= event.time.strftime("%a, %m/%d, %Y %-I:%M %p %Z") %></td>
+            <td><%= event.time.strftime("%b %-d, %Y %-I:%M %p %Z") %></td>
             <% if Admin.current_user_admin?(current_admin) %>
               <td>
                 <div class="d-flex center-vert-hor actions">
