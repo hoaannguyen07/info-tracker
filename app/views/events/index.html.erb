@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
+<div class="d-flex justify-content-center flex-column align-items-center" style="padding-top: 69px;">
   <h1>Events</h1>
   <% if Admin.current_user_admin?(current_admin)%>
     <%= button_to "New Event", new_event_path, class: 'btn btn-secondary', :method => :get%>
