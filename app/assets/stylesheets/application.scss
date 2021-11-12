@@ -2,9 +2,21 @@
 // @import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 
-.navbar {
-    margin-bottom: 20;
-    background: #800000;
+:root {
+    --header-height: 3rem;
+    --nav-width: 68px;
+    --first-color: maroon;
+    --first-color-light: #AFA5D9;
+    --white-color: #F7F6FB;
+    --body-font: 'Nunito', sans-serif;
+    --normal-font-size: 1rem;
+    --z-fixed: 100
+}
+
+*,
+::before,
+::after {
+    box-sizing: border-box
 }
 
 html {
@@ -18,25 +30,14 @@ body {
     font-family: 'Merriweather', sans-serif;
 }
 
-
-
-h1,
-h2 {
+h1, h2 {
     font-weight: bold;
 }
 p {
     font-size: 16px;
     color: black;
 }
-.jumbotron {
-    background: #0048CD;
-    color: white;
-    text-align: center;
-    p {
-            color: white;
-            font-size: 26px;
-    }
-}
+
 .link {
     color: white;
 }
@@ -61,20 +62,12 @@ caption {
     display: flex;
 }
 
-.center-text {
-    text-align: center;
-}
-
 .back-button {
     color: #0048CD;
 }
 
 .table-font {
     font-size: large;
-}
-
-.search {
-    margin-right: 0.5rem;
 }
 
 .center-vert-hor {
@@ -89,14 +82,10 @@ caption {
 }
 
 .edit {
-    margin-right: 0.2rem;
-    margin-left: 0.05rem;
     color: #007185;
 }
 
 .delete {
-    margin-left: 0.2rem;
-    margin-right: 0.05rem;
     color: red;
 }
 
@@ -125,23 +114,6 @@ caption {
     margin: 10px 0px ;
 }
 
-:root {
-    --header-height: 3rem;
-    --nav-width: 68px;
-    --first-color: maroon;
-    --first-color-light: #AFA5D9;
-    --white-color: #F7F6FB;
-    --body-font: 'Nunito', sans-serif;
-    --normal-font-size: 1rem;
-    --z-fixed: 100
-}
-
-*,
-::before,
-::after {
-    box-sizing: border-box
-}
-
 .page-top-margin {
     margin-top: calc(var(--header-height) + 1rem);
     padding-top: 25px;
@@ -152,7 +124,6 @@ caption {
 body {
     position: relative;
     margin: var(--header-height) 0 0 0;
-    padding: 0 1rem;
     font-family: var(--body-font);
     font-size: var(--normal-font-size);
     transition: .5s
@@ -169,7 +140,6 @@ body {
     justify-content: space-between;
     padding: 0 1rem;
     background-color: var(--white-color);
-    z-index: var(--z-fixed);
     transition: .5s
 }
 

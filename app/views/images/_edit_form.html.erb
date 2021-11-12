@@ -1,0 +1,32 @@
+<%= form_with(model: image) do |form| %>
+<% if image.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(image.errors.count, "error") %>
+      prohibited this player from being saved:</h2>
+
+    <ul>
+      <% image.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% if @image.img.attached? %>
+  <div class="align-items-center container">
+    <%= image_tag(@image.img, class: "show-image")%>
+  </div>
+  <br/>
+<% end %>
+
+<div class="form-group">
+  <%= form.label :caption, class: 'form-label' %>
+  <%= form.text_area :caption, class: 'form-control', placeholder: "What's happening?"%>
+</div>
+
+<br/>
+
+<button type='submit' class='btn btn-secondary'>Submit</button>
+
+<br/>
+<% end %>

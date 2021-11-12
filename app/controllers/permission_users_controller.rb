@@ -41,8 +41,16 @@ class PermissionUsersController < ApplicationController
     end
   end
 
+  # DELETE /permissions/1 or /permissions/1.json
   def destroy
-    @permission_users.destroy(@permission_users.where(user_id_id: params[:user_id], permissions_id_id: params[:permission_id]))
+    @permission_user.destroy!
+    respond_to do |format|
+      format.html { redirect_to('/permission_users', notice: 'Permission was successfully destroyed.') }
+      format.json { head(:no_content) }
+    end
   end
-  helper_method :destroy
+
+  def set_permission_user
+    @permission_user = PermissionUser.find(params[:id])
+  end
 end

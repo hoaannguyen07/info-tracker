@@ -11,7 +11,9 @@ class Admin < ApplicationRecord
   def self.from_google(email:, full_name:, uid:, avatar_url:)
     return nil unless /@gmail.com || @tamu.edu\z/.match?(email)
 
-    create_with(uid: uid, full_name: full_name, avatar_url: avatar_url).find_or_create_by!(email: email)
+    admin = create_with(uid: uid, full_name: full_name, avatar_url: avatar_url).find_or_create_by!(email: email)
+    admin.update!(avatar_url: avatar_url)
+    admin
   end
 
   has_many :players, dependent: :destroy
@@ -44,7 +46,9 @@ class Admin < ApplicationRecord
   def self.current_user_admin?(current_admin)
     user = Admin.where(email: current_admin.email).first
     admin_permission = Permission.where(description: 'admin').first
-    user_permission = PermissionUser.where(user_id_id: user.id, permissions_id_id: admin_permission.id).first
-    user_permission.nil? == false
+    user_permission = nil
+    user_permission = PermissionUser.where(user_id_id: user.id, permissions_id_id: admin_permission.id).first if !user.nil? && !admin_permission.nil?
+
+    !user_permission.nil?
   end
 end
