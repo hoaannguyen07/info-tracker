@@ -310,4 +310,23 @@ RSpec.describe('Images Feautures', type: :feature) do
       end
     end
   end
+
+  describe('#delete feature') do
+    it 'is able to delete an image' do
+      Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_admin]
+      make_admin
+      sign_in
+      image = upload_get_image
+      visit images_path
+      click_on(id: "image-#{image.id}")
+      expect(page).to(have_selector(:link_or_button, 'Delete'))
+      click_on('Delete')
+      begin
+        page.driver.browser.switch_to.alert.accept
+      rescue StandardError
+        Selenium::WebDriver::Error::NoSuchAlertError
+      end
+      expect(page).not_to(have_css("img[src$='good.png']"))
+    end
+  end
 end
