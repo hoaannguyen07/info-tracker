@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'profiles/home'
+  get 'profiles/edit'
+  get 'profiles/update'
   get 'help/index'
   root to: 'players#index'
   devise_for :admins, controllers: { omniauth_callbacks: 'admins/omniauth_callbacks' }
@@ -15,9 +18,12 @@ Rails.application.routes.draw do
   resources :images
   resources :events
 
-  get 'help/index'
-  get 'login/index'
-  get 'users/main'
-  get 'users/notes'
+  # get 'login/index'
+  # get 'users/main'
+  # get 'users/notes'
+  get 'profiles/home'
+  get 'profiles/edit'
+  post 'profiles', to: 'profiles#update', as: :update_profile
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

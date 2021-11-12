@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-center flex-column align-items-center" style="padding-top:100px">
+  <div class="container">
+    <%= render 'back'%>
+  </div>
+  <div class="container text-center">
+    <h1>
+      Editing User Profile
+    </h1>
+    <p>
+      <%= @user.email%>
+      <%= @user.full_name%>
+    </p>
+  </div>
+
+  <% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %>
+      prohibited this profile from being saved:</h2>
+
+    <ul>
+      <% @user.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  
+  <div class="d-flex form-bottom-padding" style="justify-content: center">
+    <form action=<%= update_profile_url %> id="edit_profile" method="post">
+      <label for="admin_full_name">New Full Name</label>
+      <input id="admin_full_name" name="full_name" type="text"/>
+      <br/>
+
+      <button type='submit' class='btn btn-secondary'>Submit</button>
+    </form>
+  </div>
+
+</div>
