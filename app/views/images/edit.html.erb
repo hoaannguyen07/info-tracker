@@ -1,4 +1,4 @@
-<% if Admin.current_user_admin?(current_admin)%>
+<% if Image.exist?(@image) && Admin.current_user_admin?(current_admin)%>
   <div class="d-flex flex-column" style="height: 100%">
     <div class="container page-top-margin">
       <%= render 'back'%>

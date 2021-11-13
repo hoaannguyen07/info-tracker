@@ -1,5 +1,5 @@
-<header class="header" id="header">
-  <% if current_admin != nil %>
+<% if current_admin != nil %>
+  <header class="header" id="header">
     <div class="header_toggle">
       <i class='bx bx-menu' id="header-toggle"></i>
     </div>
@@ -15,8 +15,14 @@
         </li>
       </ul>
     </div>
-  <% end %>
-</header>
+  </header>
+<% else %>
+  <header class="header" id="header" style="justify-content: end;">
+    <div>
+        <%= button_to "Sign In", admin_google_oauth2_omniauth_authorize_path, class: 'btn btn-primary'%>
+    <div>
+  </header>
+<% end %>
 <% if current_admin != nil %>
   <div class="l-navbar" id="nav-bar">
     <nav class="nav">

@@ -5,4 +5,8 @@ class Image < ApplicationRecord
 
   validates :img, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg']
   validates :caption, presence: true, length: { maximum: 256 }
+
+  def self.exist?(cur_image)
+    !cur_image.nil?
+  end
 end
