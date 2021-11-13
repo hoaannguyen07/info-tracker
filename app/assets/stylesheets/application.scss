@@ -46,6 +46,16 @@ p {
     border-color: white;
     margin-bottom: 5px;
 }
+.btn-new {
+    color: white;
+    background-color: #800000;
+    border-color: #800000;
+}
+.btn-new:hover, .btn-new:focus  {
+    color: white;
+    background-color: #6c0000 !important;
+    border-color: #590000 !important;
+}
 .btn-sm {
     background-color: white;
     display: inline-block;
@@ -64,6 +74,7 @@ caption {
 
 .back-button {
     color: #0048CD;
+    padding-left: 0 !important;
 }
 
 .table-font {
@@ -99,7 +110,6 @@ caption {
     color: white;
     font-size: 3rem;
     text-align: center;
-    padding: 4rem;
 }
 
 .gallery-image {
@@ -115,8 +125,8 @@ caption {
 }
 
 .page-top-margin {
-    margin-top: calc(var(--header-height) + 1rem);
-    padding-top: 25px;
+    margin-top: calc(var(--header-height));
+    padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 0px !important
 }
@@ -276,6 +286,10 @@ body {
         padding: 1rem 1rem 0 0
     }
 
+    .page-top-margin {
+        margin-top: calc(var(--header-height) + 1rem);
+    }
+
     .show {
         width: calc(var(--nav-width) + 156px)
     }
@@ -284,8 +298,29 @@ body {
         padding-left: calc(var(--nav-width) + 188px)
     }
 
+    .login-page {
+        padding-right: calc(var(--nav-width) + 2rem) !important;
+    }
+
     .gallery-image {
-        max-width: 40vw;
-        max-height: 40vh;
+        max-width: 60vw;
+        max-height: 60vh;
+    }
+
+    .show-image {
+        max-width: 70vw;
+        max-height: 70vh;
+    }
+
+    .show-container {
+        padding-left: 10vw !important;
+        padding-right: 10vw !important;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .show-container {
+        padding-left: 20vw !important;
+        padding-right: 20vw !important;
     }
 }

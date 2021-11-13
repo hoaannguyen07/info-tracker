@@ -319,8 +319,7 @@ RSpec.describe('Images Feautures', type: :feature) do
       image = upload_get_image
       visit images_path
       click_on(id: "image-#{image.id}")
-      expect(page).to(have_selector(:link_or_button, 'Delete'))
-      click_on('Delete')
+      click_on(id: "delete-img-#{image.id}")
       begin
         page.driver.browser.switch_to.alert.accept
       rescue StandardError
