@@ -1,5 +1,5 @@
-<header class="header" id="header">
-  <% if current_admin != nil %>
+<% if current_admin != nil %>
+  <header class="header" id="header">
     <div class="header_toggle">
       <i class='bx bx-menu' id="header-toggle"></i>
     </div>
@@ -15,12 +15,18 @@
         </li>
       </ul>
     </div>
-  <% end %>
-</header>
+  </header>
+<% else %>
+  <header class="header" id="header" style="justify-content: end;">
+    <div>
+        <%= button_to "Sign In", admin_google_oauth2_omniauth_authorize_path, class: 'btn btn-primary'%>
+    <div>
+  </header>
+<% end %>
 <% if current_admin != nil %>
   <div class="l-navbar" id="nav-bar">
     <nav class="nav">
-      <div>
+      <div class="overflow-auto h-100">
         <div class="nav_list">
           <a href=<%= root_path %> class="nav_logo tab" id="root-tab">
             <i class="fas fa-table-tennis nav_logo-icon"></i>
@@ -40,7 +46,7 @@
             <i class="bi bi-images nav_icon"></i>
             <span class="nav_name">Gallery</span>
           </a>
-          <a href=<%= root_path %> class="nav_link tab" id="profile-tab">
+          <a href='/profiles/home' class="nav_link tab" id="profile-tab">
             <i class='bx bx-user nav_icon'></i>
             <span class="nav_name">Profile</span>
           </a>
@@ -48,6 +54,10 @@
             <a href="/permission_users" class="nav_link tab" id="manage-users-tab">
               <i class="bx bx-group nav_icon"></i>
               <span class="nav_name">Manage Users</span>
+            </a>
+            <a href=<%= help_index_url %> class="nav_link tab" id="help-tab">
+              <i class="bi bi-question-circle nav-icon"></i>
+              <span class="nav_name">Help</span>
             </a>
           <% end %>
         </div>

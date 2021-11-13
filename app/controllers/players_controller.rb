@@ -5,7 +5,8 @@ class PlayersController < ApplicationController
 
   # GET /players or /players.json
   def index
-    @players = Player.where(admin_id: Admin.id(current_admin)).order('name ASC')
+    # @players = Player.where(admin_id: Admin.id(current_admin)).order('name ASC')
+    @players = Admin.info(current_admin).players.order('name ASC')
   end
 
   # GET /players/1 or /players/1.json
@@ -64,7 +65,7 @@ class PlayersController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_player
-    @player = Player.find(params[:id])
+    @player = Player.where(id: params[:id]).first
   end
 
   # Only allow a list of trusted parameters through.
