@@ -21,10 +21,7 @@ class Player < ApplicationRecord
     message: 'values must be between 0 and 2,147,483,647'
   }
 
-  # can't have wins > played b/c you can't win without playing
-  # validate :played_at_least_equal_wins
-
-  # def played_at_least_equal_wins
-  #   errors.add(:played, 'cannot be less than wins') unless wins && played && played >= wins
-  # end
+  def self.allowed_to_show?(current_admin, player_querying)
+    !player_querying.nil? && Admin.id(current_admin).equal?(player_querying.admin_id)
+  end
 end
