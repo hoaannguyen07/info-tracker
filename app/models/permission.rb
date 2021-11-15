@@ -12,4 +12,8 @@ class Permission < ApplicationRecord
   def self.admin_permission?(cur_perm)
     cur_perm.description == 'admin'
   end
+
+  def self.exist?(cur_perm)
+    !cur_perm.nil?
+  end
 end

@@ -1,4 +1,4 @@
-<% if !Permission.admin_permission?(@permission) && Admin.current_user_admin?(current_admin) %>
+<% if Permission.exist?(@permission) && !Permission.admin_permission?(@permission) && Admin.current_user_admin?(current_admin) %>
   <div class="container show-container">
     <div class="container page-top-margin">
       <%= render 'back'%>

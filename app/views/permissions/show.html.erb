@@ -1,4 +1,4 @@
-<% if Admin.current_user_admin?(current_admin)%>
+<% if Permission.exist?(@permission) && Admin.current_user_admin?(current_admin)%>
   <p id="notice"><%= notice %></p>
   <div class="container show-container">
     <div class="container page-top-margin">
