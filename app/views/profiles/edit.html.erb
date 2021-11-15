@@ -4,16 +4,16 @@
       <%= render 'back'%>
     </div>
     <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %>
-        prohibited this profile from being saved:</h2>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %>
+          prohibited this profile from being saved:</h2>
 
-      <ul>
-        <% @user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+        <ul>
+          <% @user.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
 
     <div class="container text-center">
@@ -31,7 +31,8 @@
         </div>
         <br/>
         <p>
-          Email: <%= @user.email%>
+          Email:
+          <%= @user.email%>
         </p>
       </div>
 
@@ -47,10 +48,10 @@
     </div>
   </div>
 <% else %>
-    <div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
-        <h1 style="color: #ff0000">
-        PERMISSION DENIED
-        </h1>
-        <h2>You do not have the permission to acess this page!</h2>
-    </div>
+  <div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
+    <h1 style="color: #ff0000">
+      PERMISSION DENIED
+    </h1>
+    <h2>You do not have the permission to acess this page!</h2>
+  </div>
 <% end %>

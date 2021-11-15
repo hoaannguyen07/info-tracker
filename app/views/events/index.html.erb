@@ -1,11 +1,11 @@
-<div class="d-flex flex-column align-items-center show-container" style="padding-top: 80px;">
+<div class="container flex-column align-items-center show-container" style="padding-top: 80px;">
   <div class="text-center">
     <h1>Events</h1>
     <% if Admin.current_user_admin?(current_admin)%>
       <%= button_to "New Event", new_event_path, class: 'btn btn-new', :method => :get, title: "New Event"%>
     <% end %>
   </div>
-  
+
   <br/>
 
   <div class="container">
@@ -44,9 +44,9 @@
                     </button>
                   </form>
                   <br><br>
-                  <a data-method="delete" href=<%= event_path(event) %> data-confirm="Are you sure?" class="delete" id="delete-event-<%= event.id %>">
+                  <a data-method="delete" href=<%= event_path(event) %> data-confirm="Are you sure you want to delete all of <%= event.name %>'s data? This action is irreversible!" class="delete" id="delete-event-<%= event.id %>">
                     <button class="btn" title="Delete">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash delete" viewBox="0 0 16 16">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash delete" viewbox="0 0 16 16">
                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                         <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                       </svg>
