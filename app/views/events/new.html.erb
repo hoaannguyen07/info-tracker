@@ -1,12 +1,12 @@
 <%if Admin.current_user_admin?(current_admin) %>
-  <div class="container">
-    <div class="container page-top-margin show-container">
+  <div class="container show-container">
+    <div class="container page-top-margin">
       <%= render 'back'%>
     </div>
     <div class="container text-center">
       <h1>New Event</h1>
     </div>
-    <div class="container form-bottom-padding justify-content-center show-container">
+    <div class="container form-bottom-padding justify-content-center">
       <%= render 'form', event: @event %>
     </div>
   </div>
