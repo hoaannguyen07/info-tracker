@@ -1,5 +1,5 @@
 <% if Image.exist?(@image) %>
-  <div class="container show-container" style="height: 100%">
+  <div class="d-flex flex-column align-items-center show-container">
     <div class="container page-top-margin">
       <%= render 'back'%>
     </div>
@@ -10,7 +10,7 @@
     </div>
 
     <!-- Edit/Delete buttons -->
-    <% if Admin.current_user_admin?(current_admin) %>    
+    <% if Admin.current_user_admin?(current_admin) %>
       <div class="d-flex center-vert-hor actions justify-content-center">
         <form class="button_to" method="get" action=<%= edit_image_path(@image) %>>
           <button class="btn" id="edit-img-<%= @image.id %>" title="Edit">
@@ -21,7 +21,7 @@
         </form>
         <a data-method="delete" href=<%= image_path(@image) %> data-confirm="Are you sure you?" class="delete" id="delete-img-<%= @image.id %>">
           <button class="btn" title="Delete">
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash delete" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash delete" viewbox="0 0 16 16">
               <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
               <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
             </svg>
@@ -31,23 +31,21 @@
     <% end %>
 
     <div class="container form-bottom-padding">
-      <div class="container">
-        <% if @image.img.attached? %>
-          <div class="text-center">
-            <%= image_tag(@image.img, class: "show-image", alt: "Photo gallery image", id: 'id' + @image.id.to_s)%>
-          </div>
-          <br/>
-        <% end %>
-
-        <div class="form-group">
-          <label class="form-label">
-            <strong>Caption</strong>
-          </label>
-
-          <br/>
-
-          <p><%= @image.caption %></p>
+      <% if @image.img.attached? %>
+        <div class="text-center">
+          <%= image_tag(@image.img, class: "show-image", alt: "Photo gallery image", id: 'id' + @image.id.to_s)%>
         </div>
+        <br/>
+      <% end %>
+
+      <div class="form-group">
+        <label class="form-label">
+          <strong>Caption</strong>
+        </label>
+
+        <br/>
+
+        <p><%= @image.caption %></p>
       </div>
     </div>
   </div>
