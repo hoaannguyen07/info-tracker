@@ -11,19 +11,17 @@ Rails.application.routes.draw do
     get 'admins/sign_in', to: 'admins/sessions#new', as: :new_admin_session
     get 'admins/sign_out', to: 'admins/sessions#destroy', as: :destroy_admin_session
   end
-  #   root 'login#index'
+
   resources :players
   resources :permissions
   resources :permission_users
   resources :images
   resources :events
 
-  # get 'login/index'
-  # get 'users/main'
-  # get 'users/notes'
   get 'profiles/home'
   get 'profiles/edit'
   post 'profiles', to: 'profiles#update', as: :update_profile
+  delete 'admins/:admin_id', to: 'admins#destroy', as: :destroy_admin
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

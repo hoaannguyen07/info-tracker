@@ -153,6 +153,10 @@ body {
     transition: .5s
 }
 
+.header_dropdown {
+    background-color: var(--white-color);
+}
+
 .header_toggle {
     color: var(--first-color);
     font-size: 1.5rem;
