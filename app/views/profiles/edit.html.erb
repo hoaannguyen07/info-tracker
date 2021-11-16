@@ -1,0 +1,55 @@
+<% if @user.nil? == false %>
+  <div class="container show-container">
+    <div class="container page-top-margin">
+      <%= render 'back'%>
+    </div>
+    
+
+
+    <div class="container text-center">
+      <div class="container">
+        <h1>
+          Editing User Profile
+        </h1>
+      </div>
+
+      <% if @user.errors.any? %>
+        <div class="container" id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %>
+            prohibited this profile from being saved:</h2>
+
+          <ul>
+            <% @user.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <br/>
+
+      <div class="container">
+        <div class="container form-bottom-padding">
+          <img src="<%= current_admin.avatar_url%>" width="200" height="200" class="rounded-circle">
+        </div>
+        <br/>
+        <p>
+          Email:
+          <%= @user.email%>
+        </p>
+      </div>
+
+      <div class="container form-bottom-padding">
+        <form action=<%= update_profile_url %> id="edit_profile" method="post">
+          <label for="admin_full_name" style="margin-right: 10px">Full Name:</label>
+          <input id="admin_full_name" name="full_name" type="text" value="<%= @user.full_name %>" title="Enter Name">
+          <br/><br/>
+
+          <button type='submit' class='btn btn-new'>Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <%= render 'layouts/permission_denied'%>
+<% end %>

@@ -1,39 +1,64 @@
-<div class="container">
+<% if Event.exist?(@event) %>
+  <div class="container show-container">
 
-  <div class="container page-top-margin">
-    <%= render 'back'%>
-  </div>
-  <br>
-  <div class="d-flex form-bottom-padding" style="justify-content: center">
-    <form>
-      <div class='align-self-center' style="text-align: center">
-        <h1><%= @event.name %></h1>
-      </div>
+    <div class="container page-top-margin">
+      <%= render 'back'%>
+    </div>
 
-      <div class="form-group">
-        <label for="descriptionsInput" class="form-label">Description</label>
-        <textarea type="text" id="descriptionsInput" class="form-control" disabled="disabled" readonly="readonly"><%= @event.description%></textarea>
-      </div>
+    <div class="container text-center">
+      <h1><%= @event.name %></h1>
+    </div>
 
-      <div class="form-group">
-        <label for="locationsInput" class="form-label">Location</label>
-        <textarea id="locationsInput" class="form-control" disabled="disabled" readonly="readonly"><%= @event.location %></textarea>
+    <!-- Edit/Delete buttons -->
+    <% if Admin.current_user_admin?(current_admin) %>
+      <div class="d-flex center-vert-hor actions justify-content-center">
+        <form class="button_to" method="get" action=<%= edit_event_path(@event)%> title="Edit">
+          <button class="btn" id="edit-event-<%= @event.id %>">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-pencil edit" viewbox="0 0 16 16">
+              <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+            </svg>
+          </button>
+        </form>
+        <a data-method="delete" href=<%= event_path(@event) %> data-confirm="Are you sure?" class="delete" id="delete-event-<%= @event.id %>">
+          <button class="btn" title="Delete">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash delete" viewbox="0 0 16 16">
+              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+              <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+            </svg>
+          </button>
+        </a>
       </div>
+    <% end %>
 
-      <div class="form-group">
-        <label for="timeInput" class="form-label">Time</label>
-        <textarea id="timeInput" class="form-control" disabled="disabled" readonly="readonly"><%= @event.time.strftime("%m/%d/%Y, %I:%M %p %Z") %></textarea>
-      </div>
+    <div class="container form-bottom-padding justify-content-center">
+      <form>
+        <div class="form-group">
+          <label for="descriptionsInput" class="form-label">Description</label>
+          <textarea type="text" id="descriptionsInput" class="form-control" disabled="disabled" readonly="readonly"><%= @event.description%></textarea>
+        </div>
 
-      <div class="form-group">
-        <label for="timeInput" class="form-label">Last Updated By</label>
-        <textarea type="text" id="descriptionsInput" class="form-control" disabled="disabled" readonly="readonly"><%= Admin.name_given_id(@event.updated_by)%></textarea>
-      </div>
+        <div class="form-group">
+          <label for="locationsInput" class="form-label">Location</label>
+          <textarea id="locationsInput" class="form-control" disabled="disabled" readonly="readonly"><%= @event.location %></textarea>
+        </div>
 
-      <div class="form-group">
-        <label for="timeInput" class="form-label">Created By</label>
-        <textarea type="text" id="descriptionsInput" class="form-control" disabled="disabled" readonly="readonly"><%= Admin.name_given_id(@event.created_by)%></textarea>
-      </div>
-    </form>
-  </div>
-  <div>
+        <div class="form-group">
+          <label for="timeInput" class="form-label">Time</label>
+          <textarea id="timeInput" class="form-control" disabled="disabled" readonly="readonly"><%= @event.time.strftime("%A %B %-d, %Y, %-I:%M %p %Z") %></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="timeInput" class="form-label">Last Updated By</label>
+          <textarea type="text" id="descriptionsInput" class="form-control" disabled="disabled" readonly="readonly"><%= Admin.name_given_id(@event.updated_by)%></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="timeInput" class="form-label">Created By</label>
+          <textarea type="text" id="descriptionsInput" class="form-control" disabled="disabled" readonly="readonly"><%= Admin.name_given_id(@event.created_by)%></textarea>
+        </div>
+      </form>
+    </div>
+    <div>
+    <% else %>
+      <%= render 'layouts/permission_denied'%>
+    <% end %>

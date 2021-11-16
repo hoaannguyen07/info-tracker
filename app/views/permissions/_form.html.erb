@@ -1,20 +1,21 @@
 <%= form_with(model: permission) do |form| %>
-  <% if permission.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(permission.errors.count, "error") %> prohibited this permission from being saved:</h2>
+<% if permission.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(permission.errors.count, "error") %>
+      prohibited this permission from being saved:</h2>
 
-      <ul>
-        <% permission.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="form-group">
-    <%= form.label :description, class: 'form-label' %>
-    <%= form.text_field :description, class: 'form-control', rows: '3', placeholder: 'Enter Permission Description'%>
+    <ul>
+      <% permission.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
   </div>
+<% end %>
+<div class="form-group">
+  <%= form.label :description, class: 'form-label' %>
+  <%= form.text_field :description, class: 'form-control', rows: '3', placeholder: 'Enter Permission Description'%>
+</div>
 
-  <br>
-  <button type='submit' class='btn btn-secondary'>Submit</button>
+<br>
+<button type='submit' class='btn btn-new'>Submit</button>
 <% end %>
