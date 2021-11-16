@@ -1,20 +1,18 @@
-<% if Admin.current_user_admin?(current_admin)%>
-  <div class="d-flex flex-column" style="height: 100%">
+<% if Image.exist?(@image) && Admin.current_user_admin?(current_admin)%>
+  <div class="d-flex flex-column align-items-center show-container">
     <div class="container page-top-margin">
       <%= render 'back'%>
     </div>
-    <div class="container center-text">
+    <div class="container text-center">
       <h1>
         Update Image
       </h1>
     </div>
-    <div class="d-flex form-bottom-padding" style="justify-content: center">
+    <div class="d-flex form-bottom-padding justify-content-center">
       <br/>
-      <%= render 'form', image: @image %>
+      <%= render 'edit_form', image: @image %>
     </div>
   </div>
 <% else %>
-  <div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
-    <h1>You are not an admin! Better luck next time!</h1>
-  </div>
+  <%= render 'layouts/permission_denied'%>
 <% end %>

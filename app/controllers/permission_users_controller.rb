@@ -31,7 +31,13 @@ class PermissionUsersController < ApplicationController
 
       respond_to do |format|
         if @permission_user.save
-          format.html { redirect_to('/permission_users', notice: 'The user\'s permission has been successfully updated!') }
+          format.html do
+            redirect_to('/permission_users',
+                        notice: "#{Admin.find(params[:user_id]).full_name} has been
+                        given the #{Permission.find(params[:permission_id]).description}
+                        permission successfully!"
+                       )
+          end
           format.json { render(:show, status: :created, location: @permission) }
         else
           format.html { render(:new, status: :unprocessable_entity) }
@@ -41,8 +47,16 @@ class PermissionUsersController < ApplicationController
     end
   end
 
+  # DELETE /permission_users/1 or /permission_users/1.json
   def destroy
-    @permission_users.destroy(@permission_users.where(user_id_id: params[:user_id], permissions_id_id: params[:permission_id]))
+    @permission_user.destroy!
+    respond_to do |format|
+      format.html { redirect_to('/permission_users', notice: 'Permission was successfully destroyed.') }
+      format.json { head(:no_content) }
+    end
   end
-  helper_method :destroy
+
+  def set_permission_user
+    @permission_user = PermissionUser.where(id: params[:id]).first
+  end
 end

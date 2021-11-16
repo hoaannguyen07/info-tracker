@@ -1,15 +1,17 @@
-<div class="d-flex flex-column align-items-center page-top-margin" style="height: 100%">
+<div class="d-flex flex-column align-items-center show-container" style="padding-top: 80px;">
   <h1>Photo Gallery</h1>
   <% if Admin.current_user_admin?(current_admin) %>
-    <%= button_to "New Image", new_image_path, class: 'btn btn-secondary', :method => :get%>
+    <%= button_to "New Image", new_image_path, class: 'btn btn-new', :method => :get%>
   <% end %>
+
   <br/>
+
   <div class="grid-container">
     <div class="grid-cell">
       <% @images.each do |image| %>
         <form class="button_to" method="get" action=<%= image_path(image) %>>
           <button class="btn" id="image-<%= image.id %>">
-            <%= image_tag(image.img, class: "gallery-image")%>
+            <%= image_tag(image.img, class: "gallery-image", alt: "Photo gallery image")%>
           </button>
         </form>
       <% end %>

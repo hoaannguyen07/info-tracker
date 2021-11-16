@@ -1,20 +1,19 @@
-<% if Admin.current_user_admin?(current_admin) %>
-  <div class="container">
+<% if Permission.exist?(@permission) && !Permission.admin_permission?(@permission) && Admin.current_user_admin?(current_admin) %>
+  <div class="container show-container">
     <div class="container page-top-margin">
       <%= render 'back'%>
     </div>
-    <div class="container center-text">
+    <div class="container text-center">
       <h1>
-        Editing <%= @permission.description%>
+        Editing
+        <%= @permission.description%>
       </h1>
     </div>
 
-    <div class="d-flex" style="justify-content: center">
+    <div class="container form-bottom-padding justify-content-center">
       <%= render 'form', permission: @permission %>
     </div>
   </div>
 <% else %>
-  <div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
-    <h1>You are not an admin! Better luck next time!</h1>
-  </div>
+  <%= render 'layouts/permission_denied'%>
 <% end %>
