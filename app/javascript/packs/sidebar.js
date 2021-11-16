@@ -14,7 +14,7 @@ const toggleNavbar = (toggle, nav, headerpd) =>{
 	if(toggle && nav && headerpd){
 		toggle.addEventListener('click', ()=>{
 			// show navbar
-			nav.classList.toggle('show')
+			nav.classList.toggle('show_side_bar')
 			// change icon
 			toggle.classList.toggle('bx-x')
 			// add padding to header

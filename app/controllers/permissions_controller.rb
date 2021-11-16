@@ -59,7 +59,7 @@ class PermissionsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_permission
-    @permission = Permission.find(params[:id])
+    @permission = Permission.where(id: params[:id]).first
   end
 
   # Only allow a list of trusted parameters through.

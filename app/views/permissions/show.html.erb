@@ -1,4 +1,4 @@
-<% if Admin.current_user_admin?(current_admin)%>
+<% if Permission.exist?(@permission) && Admin.current_user_admin?(current_admin)%>
   <p id="notice"><%= notice %></p>
   <div class="container show-container">
     <div class="container page-top-margin">
@@ -36,10 +36,5 @@
     </div>
   </div>
 <% else %>
-  <div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
-    <h1 style="color: #ff0000">
-      PERMISSION DENIED
-    </h1>
-    <h2>You do not have the permission to acess this page!</h2>
-  </div>
+  <%= render 'layouts/permission_denied'%>
 <% end %>

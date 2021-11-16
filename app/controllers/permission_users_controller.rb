@@ -51,12 +51,12 @@ class PermissionUsersController < ApplicationController
   def destroy
     @permission_user.destroy!
     respond_to do |format|
-      format.html { redirect_to('/permission_users', notice: "#{@permission_user.description} was successfully destroyed.") }
+      format.html { redirect_to('/permission_users', notice: 'Permission was successfully destroyed.') }
       format.json { head(:no_content) }
     end
   end
 
   def set_permission_user
-    @permission_user = PermissionUser.find(params[:id])
+    @permission_user = PermissionUser.where(id: params[:id]).first
   end
 end

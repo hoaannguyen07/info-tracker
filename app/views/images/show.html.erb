@@ -30,14 +30,16 @@
       </div>
     <% end %>
 
-    <div class="container form-bottom-padding">
+    <div class="d-flex justify-content-center">
       <% if @image.img.attached? %>
-        <div class="text-center">
+        <div class="align-items-center container">
           <%= image_tag(@image.img, class: "show-image", alt: "Photo gallery image", id: 'id' + @image.id.to_s)%>
         </div>
         <br/>
       <% end %>
+    </div>
 
+    <div class="container form-bottom-padding ">
       <div class="form-group">
         <label class="form-label">
           <strong>Caption</strong>
@@ -50,10 +52,5 @@
     </div>
   </div>
 <% else %>
-  <div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
-    <h1 style="color: #ff0000">
-      PERMISSION DENIED
-    </h1>
-    <h2>You do not have the permission to acess this page!</h2>
-  </div>
+  <%= render 'layouts/permission_denied'%>
 <% end %>

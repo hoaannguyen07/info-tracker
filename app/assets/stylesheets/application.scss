@@ -27,7 +27,11 @@ body {
     height: 100%;
     background: white;
     color: black;
-    font-family: 'Merriweather', sans-serif;
+    position: relative;
+    margin: var(--header-height) 0 0 0;
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    transition: .5s
 }
 
 h1, h2 {
@@ -131,14 +135,6 @@ caption {
     padding-left: 0px !important
 }
 
-body {
-    position: relative;
-    margin: var(--header-height) 0 0 0;
-    font-family: var(--body-font);
-    font-size: var(--normal-font-size);
-    transition: .5s
-}
-
 .header {
     width: 100%;
     height: var(--header-height);
@@ -174,6 +170,10 @@ body {
 
 .header_img img {
     width: 40px
+}
+
+.dropdown-menu {
+    min-width: 7rem;
 }
 
 .l-navbar {
@@ -236,7 +236,7 @@ body {
     font-size: 1.25rem
 }
 
-.show {
+.show_side_bar {
     left: 0
 }
 
@@ -294,7 +294,7 @@ body {
         margin-top: calc(var(--header-height) + 1rem);
     }
 
-    .show {
+    .show_side_bar {
         width: calc(var(--nav-width) + 156px)
     }
 

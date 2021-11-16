@@ -1,20 +1,10 @@
 <% if @user.nil? == false %>
-  <div class="container show-container" style="padding-top:80px">
-    <div class="container">
+  <div class="container show-container">
+    <div class="container page-top-margin">
       <%= render 'back'%>
     </div>
-    <% if @user.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@user.errors.count, "error") %>
-          prohibited this profile from being saved:</h2>
+    
 
-        <ul>
-          <% @user.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
 
     <div class="container text-center">
       <div class="container">
@@ -22,6 +12,19 @@
           Editing User Profile
         </h1>
       </div>
+
+      <% if @user.errors.any? %>
+        <div class="container" id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %>
+            prohibited this profile from being saved:</h2>
+
+          <ul>
+            <% @user.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
       <br/>
 
@@ -48,10 +51,5 @@
     </div>
   </div>
 <% else %>
-  <div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
-    <h1 style="color: #ff0000">
-      PERMISSION DENIED
-    </h1>
-    <h2>You do not have the permission to acess this page!</h2>
-  </div>
+  <%= render 'layouts/permission_denied'%>
 <% end %>

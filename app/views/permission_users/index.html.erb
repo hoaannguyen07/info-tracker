@@ -45,7 +45,7 @@
               </td>
               <td>
                 <% admin.permissions.each do |admin_permission| %>
-                  <% if Permission.where(id: admin_permission.permissions_id_id).first.description == 'admin'%>
+                  <% if Permission.where(id: admin_permission.permissions_id_id).first.description == 'admin' && admin.email != Admin.info(current_admin).email%>
                     admin
                   <% else %>
                     <a data-method="delete" href=<%= permission_user_path(admin_permission) %> data-confirm="Are you sure you want to remove <%= Permission.where(id: admin_permission.permissions_id_id).first.description %> from <%= admin.full_name %>?" class="delete" id="delete-permission-<%= admin_permission.id %>">
@@ -72,10 +72,5 @@
     </div>
   </div>
 <% else %>
-  <div class="d-flex justify-content-center flex-column align-items-center" style="height: 100%">
-    <h1 style="color: #ff0000">
-      PERMISSION DENIED
-    </h1>
-    <h2>You do not have the permission to acess this page!</h2>
-  </div>
+  <%= render 'layouts/permission_denied'%>
 <% end %>
