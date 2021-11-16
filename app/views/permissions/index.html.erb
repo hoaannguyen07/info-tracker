@@ -1,17 +1,16 @@
 <% if Admin.current_user_admin?(current_admin)%>
   <div class="container flex-column align-items-center show-container" style="padding-top: 80px;">
-    <form class="button_to" method="get" action=<%= permission_users_path %>>
-      <button class="btn back-button" id="back">
-        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-short back-button" viewbox="0 0 16 16">
-          <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
-        </svg>
-        <span class="back-button">Back</span>
-      </button>
-    </form>
+    <%= render 'permission_users/back'%>
   </div>
   <div class="d-flex justify-content-center flex-column align-items-center" style="padding-top: 80px;">
-    <h1>Permissions</h1>
+    <div class="text-center">
+      <h1>Permissions</h1>
+      <%= button_to "Add a New Permission", new_permission_path, class: 'btn btn-new', :method => :get%>
     <div>
+
+    <br/>
+
+    </div>
       <table class="table table-striped table-bordered table-responsive table-font">
         <thead class="thead-light">
           <tr>
@@ -58,7 +57,6 @@
 
     <br>
 
-    <%= button_to "Add a New Permission", new_permission_path, class: 'btn btn-new', :method => :get%>
   </div>
 <% else %>
   <%= render 'layouts/permission_denied'%>

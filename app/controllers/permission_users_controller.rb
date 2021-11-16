@@ -51,7 +51,7 @@ class PermissionUsersController < ApplicationController
   def destroy
     @permission_user.destroy!
     respond_to do |format|
-      format.html { redirect_to('/permission_users', notice: "Permission was successfully destroyed.") }
+      format.html { redirect_to('/permission_users', notice: 'Permission was successfully destroyed.') }
       format.json { head(:no_content) }
     end
   end
